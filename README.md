@@ -4,7 +4,7 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 
 ## Features:
 - **Wayland Session Selector**: Allows you to choose a desktop session for your system.
-- **Gamescope Gaming Mode**: Switch to a full-screen gaming experience similar to SteamOS.
+- **Gamescope Gaming Mode**: Switch to a full-screen gaming experience similar to SteamOS. It uses [gamescope-session-steam](https://github.com/ChimeraOS/gamescope-session-steam) (Thanks to ChimeraOS team for this).
 - **SDDM Configuration**: Automatically configures SDDM for autologin.
 - **Shortcut Creation**: Adds a desktop shortcut for easy switching to Gaming Mode.
 - **Optional Tools**: Offers installation of **Flatpak**, **Decky Loader**.
