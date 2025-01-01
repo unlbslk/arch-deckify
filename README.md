@@ -19,7 +19,7 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 
 ## How to install?
 
-**Run this code in your terminal:**
+**Run this code in your terminal and follow the instructions:**
 ```bash
 curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh > deckify_install.sh && bash deckify_install.sh; rm -rf deckify_install.sh
 ```
