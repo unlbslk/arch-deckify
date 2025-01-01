@@ -21,7 +21,7 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 
 **Run this code in your terminal:**
 ```bash
-curl -L https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh | sh
+curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh > deckify_install.sh && bash deckify_install.sh; rm -rf deckify_install.sh
 ```
 And that's all!
 
@@ -43,7 +43,7 @@ You can also switch between Gaming Mode and Desktop Mode easily using the Steam 
 ### Change Default Desktop
 **To change the session used when switching to Desktop Mode, run the following script:**
 ```bash
-curl -L https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/change_default_desktop.sh | sh
+curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/change_default_desktop.sh > deckify_change_default_desktop.sh && bash deckify_change_default_desktop.sh; rm -rf deckify_change_default_desktop.sh
 ```
 
 ### Decky Plugin Loader
@@ -52,10 +52,12 @@ Please note that it is **not an official tool** and may cause issues. Any potent
 
 **To install Decky Loader:**
 ```bash
+curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/setup_deckyloader.sh > setup_deckyloader.sh && bash setup_deckyloader.sh; rm -rf setup_deckyloader.sh
 curl -L https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/setup_deckyloader.sh | sh
 ```
 **To remove Decky Loader:**
 ```bash
+curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/remove_deckyloader.sh > remove_deckyloader.sh && bash remove_deckyloader.sh; rm -rf remove_deckyloader.sh
 curl -L https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/remove_deckyloader.sh | sh
 ```
 
