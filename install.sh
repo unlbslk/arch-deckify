@@ -9,6 +9,14 @@ echo -e "\e[1;33mWelcome to Arch SteamOS Script\e[0m"
 echo -e "\e[91mWarning: This script mostly does not work on NVIDIA cards.\e[0m"
 echo -e "\e[37mThis script has been made to work only on SDDM.\e[0m"
 echo -e "\e[37mYou must make additional changes for other display managers.\e[0m"
+
+if ! pacman -Qs sddm > /dev/null; then
+    echo "SDDM is not installed. (EXITING)
+    exit 1
+else
+    echo "SDDM is installed."
+fi
+
 sudo whoami
 echo
 
