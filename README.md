@@ -23,6 +23,7 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 ```bash
 curl -L https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh | sh
 ```
+And that's all!
 
 ## ⚠️ Important Notice (READ BEFORE INSTALLING)
 
