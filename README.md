@@ -61,4 +61,4 @@ curl -L https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/r
 
 ## Disclaimer
 
-All logos, trademarks, and names related to **Steam**, **SteamOS**, **Steam Deck**, **Valve**, and other software such as **Plasma** and **Arch** are the property of their respective owners. These logos and names are used for reference and informational purposes only. This project is not affiliated with, endorsed, or sponsored by **Valve**, **Steam**, **SteamOS**, **Steam Deck**, **Plasma**, **Arch Linux**, **Decky Loader** or any of their respective organizations. All rights reserved to the original trademark holders.
+All logos, trademarks, and names related to **Steam**, **SteamOS**, **Steam Deck**, **Valve**, **Deckify** and other software such as **Plasma** and **Arch** are the property of their respective owners. These logos and names are used for reference and informational purposes only. This project is not affiliated with, endorsed, or sponsored by **Valve**, **Steam**, **SteamOS**, **Steam Deck**, **Plasma**, **Arch Linux**, **Decky Loader**, **Deckify** or any of their respective organizations. All rights reserved to the original trademark holders.
