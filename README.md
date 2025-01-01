@@ -53,12 +53,10 @@ Please note that it is **not an official tool** and may cause issues. Any potent
 **To install Decky Loader:**
 ```bash
 curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/setup_deckyloader.sh > setup_deckyloader.sh && bash setup_deckyloader.sh; rm -rf setup_deckyloader.sh
-curl -L https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/setup_deckyloader.sh | sh
 ```
 **To remove Decky Loader:**
 ```bash
 curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/remove_deckyloader.sh > remove_deckyloader.sh && bash remove_deckyloader.sh; rm -rf remove_deckyloader.sh
-curl -L https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/remove_deckyloader.sh | sh
 ```
 
 ## Disclaimer
