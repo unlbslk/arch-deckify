@@ -14,6 +14,7 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 - Arch Linux (or an Arch-based distribution)
 - SDDM display manager
 - A compatible GPU (NVIDIA hardware may face issues)
+- A gamepad for best UI experience
 - KDE Plasma Desktop (<ins>Other desktops are also supported</ins>, but KDE Plasma is recommended for the best experience.)
 
 
