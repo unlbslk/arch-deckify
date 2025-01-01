@@ -84,8 +84,6 @@ sudo sed -i "s/^Relogin=false/Relogin=true/; s/^User=.*/User=$(whoami)/" /etc/sd
 
 echo "Autologin configured for user: $(whoami)"
 
-echo "[7/16] Creating /usr/bin/steamos-session-select"
-
 echo '#!/usr/bin/bash
 
 CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
@@ -108,7 +106,7 @@ if [ "$1" == "plasma" ] || [ "$1" == "desktop" ]; then
         echo "SDDM config file could not be found at $CONFIG_FILE."
         exit 1
     fi
-    NEW_SESSION='$selected_de' # For other desktops, change here.
+    NEW_SESSION='$selected_de'  # For other desktops, change here.
     sudo sed -i "s/^Session=.*/Session=${NEW_SESSION}/" "$CONFIG_FILE"
     steam -shutdown
 
