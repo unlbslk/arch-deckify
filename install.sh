@@ -204,13 +204,14 @@ chmod +x "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop"
 
 # Application
 if [ ! -e "/usr/share/applications/Return_to_Gaming_Mode.desktop" ]; then
-    echo "[Desktop Entry]
-    Name=Gaming Mode
-    Exec=steamos-session-select gamescope
-    Icon=$HOME/arch-deckify/steamdeck-gaming-return.png
-    Terminal=false
+    echo '[Desktop Entry]
+    Name=Uninstall Decky Loader
+    Comment=Uninstalls Decky Loader from your system
+    Exec=sh -c "read -p \"Do you really want to uninstall Decky Loader? (y/n): \" confirm && if [[ \$confirm == \"y\" || \$confirm == \"Y\" ]]; then curl -L https://github.com/SteamDeckHomebrew/decky-installer/releases/latest/download/uninstall.sh | sh; fi"
+    Icon='"$HOME"'/arch-deckify/steamdeck-gaming-return.png
+    Terminal=true
     Type=Application
-    StartupNotify=false" > ~/Return_to_Gaming_Mode.desktop
+    StartupNotify=false' > "$(xdg-user-dir DESKTOP)/Uninstall_Decky_Loader.desktop"
 
     sudo cp ~/Return_to_Gaming_Mode.desktop /usr/share/applications/
     rm -rf ~/Return_to_Gaming_Mode.desktop
