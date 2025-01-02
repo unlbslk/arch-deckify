@@ -51,7 +51,7 @@ if ! command -v yay &> /dev/null; then
     cd ~
     git clone https://aur.archlinux.org/yay.git
     cd yay
-    makepkg -si --noconfirm
+    makepkg -si --noconfirm --sudoloop
 
     if command -v yay &> /dev/null; then
         echo "Yay has been successfully installed."
@@ -175,7 +175,7 @@ fi
 
 echo "[13/17] Installing xpadneo (driver for some gamepads)"
 if ! pacman -Qs xpadneo > /dev/null; then
-    yay -S xpadneo-dkms --noconfirm
+    yay -S xpadneo-dkms --noconfirm --sudoloop
 else
     echo "Xpadneo is already installed (SKIPPED)."
 fi
