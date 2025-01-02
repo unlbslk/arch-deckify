@@ -190,17 +190,17 @@ else
 fi
 
 # Desktop icon
-if [ ! -e "$XDG_DESKTOP_DIR/Return_to_Gaming_Mode.desktop" ]; then
+if [ ! -e "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop" ]; then
     echo '[Desktop Entry]
     Name=Gaming Mode
     Exec=steamos-session-select gamescope
     Icon=~/arch-deckify/steamdeck-gaming-return.png
     Terminal=false
     Type=Application
-    StartupNotify=false' > "$XDG_DESKTOP_DIR/Return_to_Gaming_Mode.desktop"
+    StartupNotify=false' > "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop"
 fi
 
-chmod +x "$XDG_DESKTOP_DIR/Return_to_Gaming_Mode.desktop"
+chmod +x "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop"
 
 # Application
 if [ ! -e "/usr/share/applications/Return_to_Gaming_Mode.desktop" ]; then
@@ -252,7 +252,7 @@ if [ ! -f "${HOME}/homebrew/services/PluginLoader" ]; then
         Icon=~/arch-deckify/steamdeck-gaming-return.png
         Terminal=true
         Type=Application
-        StartupNotify=false' > "$XDG_DESKTOP_DIR/Uninstall_Decky_Loader.desktop"
+        StartupNotify=false' > "$(xdg-user-dir DESKTOP)/Uninstall_Decky_Loader.desktop"
         echo "Installed Decky Loader."
     else
         echo "Skipped."
