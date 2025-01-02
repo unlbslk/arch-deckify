@@ -51,7 +51,7 @@ if ! command -v yay &> /dev/null; then
     cd ~
     git clone https://aur.archlinux.org/yay.git
     cd yay
-    makepkg -si --noconfirm
+    makepkg -si --noconfirm 
 
     if command -v yay &> /dev/null; then
         echo "Yay has been successfully installed."
