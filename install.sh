@@ -254,6 +254,7 @@ if [ ! -f "${HOME}/homebrew/services/PluginLoader" ]; then
         Terminal=true
         Type=Application
         StartupNotify=false' > "$(xdg-user-dir DESKTOP)/Uninstall_Decky_Loader.desktop"
+        chmod +x "$(xdg-user-dir DESKTOP)/Uninstall_Decky_Loader.desktop"
         echo "Installed Decky Loader."
     else
         echo "Skipped."
