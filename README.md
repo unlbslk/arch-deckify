@@ -1,8 +1,8 @@
-# Arch-Deckify
+# 🎮 Arch-Deckify
 A script to easily set up a SteamOS-like gaming environment on Arch Linux.
 This script is designed to bring SteamOS-style session switching to Arch Linux. It automates the installation and setup of a **Gaming Mode (Gamescope)** and a **Desktop Mode (Wayland session)**, along with configuration for **SDDM** and several optional components.
 
-## Features:
+## 📌 Features:
 - **Wayland Session Selector**: Allows you to choose a desktop session for your system.
 - **Gamescope Gaming Mode**: Switch to a full-screen gaming experience similar to SteamOS. It uses [gamescope-session-steam](https://github.com/ChimeraOS/gamescope-session-steam) (Thanks to ChimeraOS team for this).
 - **SDDM Configuration**: Automatically configures SDDM for autologin.
@@ -10,7 +10,7 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 - **Optional Tools**: Offers installation of **Flatpak**, **Decky Loader**.
 - **Session Switcher**: Shortcuts to easily switch between desktop and game mode.
 
-## Requirements:
+## ⛓️ Requirements:
 - Arch Linux (or an Arch-based distribution)
 - SDDM display manager
 - A compatible GPU (NVIDIA hardware may face issues)
@@ -18,7 +18,7 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 - KDE Plasma Desktop (<ins>Other desktops are also supported</ins>, but KDE Plasma is recommended for the best experience.)
 
 
-## How to install?
+## 🧭 How to install?
 
 **Run this code in your terminal and follow the instructions:**
 ```bash
