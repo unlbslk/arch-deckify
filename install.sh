@@ -243,6 +243,7 @@ if [ ! -f "${HOME}/homebrew/services/PluginLoader" ]; then
     echo -e "\e[33mWARNING: \e[0mThis is an UNOFFICIAL project created by the community. It is not necessary for your system, and you may encounter issues while using it. The choice to install is entirely yours, and any potential problems or risks are your responsibility."
     read -p "(y/n): " choice
     if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
+        sudo pacman -S jq --noconfirm
         curl -L https://github.com/SteamDeckHomebrew/decky-installer/releases/latest/download/install_release.sh | sh
         sudo sed -i 's~TimeoutStopSec=.*$~TimeoutStopSec=2~g' /etc/systemd/system/plugin_loader.service
         sudo systemctl daemon-reload
