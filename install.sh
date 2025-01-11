@@ -239,8 +239,8 @@ else
 fi
 
 if [ ! -f "${HOME}/homebrew/services/PluginLoader" ]; then
-    echo -e "\n\n\e[40mmWant to install Decky Loader? With this, you can install plugins to your Steam interface.\e[0m"
-    echo -e "\e[31mWARNING: \e[0mThis is an UNOFFICIAL project created by the community. It is not necessary for your system, and you may encounter issues while using it. The choice to install is entirely yours, and any potential problems or risks are your responsibility."
+    echo -e "\n\n\e[40mWant to install Decky Loader? With this, you can install plugins to your Steam interface.\e[0m"
+    echo -e "\e[33mWARNING: \e[0mThis is an UNOFFICIAL project created by the community. It is not necessary for your system, and you may encounter issues while using it. The choice to install is entirely yours, and any potential problems or risks are your responsibility."
     read -p "(y/n): " choice
     if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
         curl -L https://github.com/SteamDeckHomebrew/decky-installer/releases/latest/download/install_release.sh | sh
