@@ -211,13 +211,12 @@ if [ ! -e "/usr/share/applications/Return_to_Gaming_Mode.desktop" ]; then
     Terminal=false
     Type=Application
     StartupNotify=false" > "~/Return_to_Gaming_Mode.desktop"
-fi
-
-chmod +x "~/Return_to_Gaming_Mode.desktop"
-
+    chmod +x "~/Return_to_Gaming_Mode.desktop"
     sudo cp ~/Return_to_Gaming_Mode.desktop /usr/share/applications/
     rm -rf ~/Return_to_Gaming_Mode.desktop
 fi
+
+
 
 echo "[15/17] 'Return to Gaming Mode' has been added to desktop and application menu."
 
