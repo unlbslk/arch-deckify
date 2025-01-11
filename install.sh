@@ -210,10 +210,10 @@ if [ ! -e "/usr/share/applications/Return_to_Gaming_Mode.desktop" ]; then
     Icon=$HOME/arch-deckify/steamdeck-gaming-return.png
     Terminal=false
     Type=Application
-    StartupNotify=false" > "~/Return_to_Gaming_Mode.desktop"
-    chmod +x "~/Return_to_Gaming_Mode.desktop"
-    sudo cp ~/Return_to_Gaming_Mode.desktop /usr/share/applications/
-    rm -rf ~/Return_to_Gaming_Mode.desktop
+    StartupNotify=false" > "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
+    chmod +x "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
+    sudo cp "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop" "/usr/share/applications/"
+    rm -rf "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
 fi
 
 
