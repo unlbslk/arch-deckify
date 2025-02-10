@@ -17,7 +17,11 @@ while true; do
     if echo "$available_desktops" | grep -q -w "^$user_choice"; then
         selected_de="$user_choice"
         echo '#!/usr/bin/bash
-CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
+if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
+    CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
+else
+    CONFIG_FILE="/usr/lib/sddm/sddm.conf.d/default.conf"
+fi
 
 # If no arguments are provided, list valid arguments
 if [ $# -eq 0 ]; then
@@ -34,7 +38,7 @@ if [ "$1" == "plasma" ] || [ "$1" == "desktop" ]; then
     
     echo "Switching session to Desktop."
     if [ ! -f "$CONFIG_FILE" ]; then
-        echo "SDDM config file could not be found at $CONFIG_FILE."
+        echo "SDDM config file could not be found at ${CONFIG_FILE}."
         exit 1
     fi
     NEW_SESSION='$selected_de' # For other desktops, change here.
@@ -46,7 +50,7 @@ elif [ "$1" == "gamescope" ]; then
     
     echo "Switching session to Gamescope."
     if [ ! -f "$CONFIG_FILE" ]; then
-        echo "SDDM config file could not be found at $CONFIG_FILE."
+        echo "SDDM config file could not be found at ${CONFIG_FILE}."
         exit 1
     fi
     NEW_SESSION="gamescope-session-steam"
