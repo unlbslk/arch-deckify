@@ -43,7 +43,7 @@ while true; do
 done
 
 
-echo "[1/17] Checking if yay is installed..."
+echo "[1/16] Checking if yay is installed..."
 if ! command -v yay &> /dev/null; then
     echo "Installing yay..."
     sudo pacman -S --needed base-devel git --noconfirm
@@ -63,7 +63,7 @@ else
     echo "Yay is already installed. (SKIPPED)"
 fi
 
-echo "[2/17] Checking and enabling multilib repository..."
+echo "[2/16] Checking and enabling multilib repository..."
 if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
     echo "Enabling multilib repository..."
     echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" | sudo tee -a /etc/pacman.conf
@@ -72,10 +72,10 @@ else
     echo "Multilib repository is already enabled. (SKIPPED)"
 fi
 
-echo "[3/17] Updating the system..."
+echo "[3/16] Updating the system..."
 sudo pacman -Syu --noconfirm
 
-echo "[4/17] Checking if Steam is installed..."
+echo "[4/16] Checking if Steam is installed..."
 if ! command -v steam &> /dev/null; then
     echo "Steam is not installed. Installing Steam..."
     sudo pacman -S steam --noconfirm
@@ -83,20 +83,28 @@ else
     echo "Steam is already installed. (SKIPPED)"
 fi
 
-echo "[5/17] Installing gamescope-session-steam-git using yay..."
+echo "[5/16] Installing gamescope-session-steam-git using yay..."
 yay -S gamescope-session-steam-git --noconfirm --sudoloop
 
-echo "[6/17] Configuring auto-login for SDDM..."
-
-sudo sed -i "s/^Relogin=false/Relogin=true/; s/^User=.*/User=$(whoami)/" /etc/sddm.conf.d/kde_settings.conf
+echo "[6/16] Configuring auto-login for SDDM..."
+if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
+    CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
+else
+    CONFIG_FILE="/usr/lib/sddm/sddm.conf.d/default.conf"
+fi
+sudo sed -i "s/^Relogin=false/Relogin=true/; s/^User=.*/User=$(whoami)/" "$CONFIG_FILE"
 
 echo "Autologin configured for user: $(whoami)"
 
-echo "[7/17] Creating /usr/bin/steamos-session-select"
+echo "[7/16] Creating /usr/bin/steamos-session-select"
 
 echo '#!/usr/bin/bash
 
-CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
+if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
+    CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
+else
+    CONFIG_FILE="/usr/lib/sddm/sddm.conf.d/default.conf"
+fi
 
 # If no arguments are provided, list valid arguments
 if [ $# -eq 0 ]; then
@@ -136,20 +144,20 @@ else
     exit 1
 fi' | sudo tee /usr/bin/steamos-session-select > /dev/null
 
-echo "[8/17] Making /usr/bin/steamos-session-select executable..."
+echo "[8/16] Making /usr/bin/steamos-session-select executable..."
 sudo chmod +x /usr/bin/steamos-session-select
 
-echo "[9/17] Making /etc/sddm.conf.d/kde_settings.conf editable without prompting sudo password..."
+echo "[9/16] Making SDDM session config editable without prompting sudo password..."
 sudoers_file="/etc/sudoers.d/sddm_config_edit"
 if [ ! -f "$sudoers_file" ]; then
-    echo "ALL ALL=(ALL) NOPASSWD: /usr/bin/sed -i s/^Session=*/Session=*/ /etc/sddm.conf.d/kde_settings.conf" | sudo tee "$sudoers_file" > /dev/null
+    echo "ALL ALL=(ALL) NOPASSWD: /usr/bin/sed -i s/^Session=*/Session=*/ ${CONFIG_FILE}" | sudo tee "$sudoers_file" > /dev/null
     sudo chmod 440 "$sudoers_file"
 else
-    echo "Passwordless sudo for editing /etc/sddm.conf.d/kde_settings.conf is already set. (SKIPPED)"
+    echo "Passwordless sudo for editing SDDM session config is already set. (SKIPPED)"
 fi
 
 
-echo "[10/17] Installing MangoHUD"
+echo "[10/16] Installing MangoHUD"
 if ! pacman -Qs mangohud > /dev/null; then
     
     sudo pacman -S mangohud --noconfirm
@@ -157,7 +165,7 @@ else
     echo "MangoHUD is already installed (SKIPPED)."
 fi
 
-echo "[11/17] Installing wget"
+echo "[11/16] Installing wget"
 if ! pacman -Qs wget > /dev/null; then
     
     sudo pacman -S wget --noconfirm
@@ -165,7 +173,7 @@ else
     echo "wget is already installed (SKIPPED)."
 fi
 
-echo "[12/17] Installing Gamescope"
+echo "[12/16] Installing Gamescope"
 if ! pacman -Qs gamescope > /dev/null; then
     
     sudo pacman -S gamescope --noconfirm
@@ -173,14 +181,7 @@ else
     echo "Gamescope is already installed (SKIPPED)."
 fi
 
-echo "[13/17] Installing xpadneo (driver for some gamepads)"
-if ! pacman -Qs xpadneo > /dev/null; then
-    yay -S xpadneo-dkms --noconfirm --sudoloop
-else
-    echo "Xpadneo is already installed (SKIPPED)."
-fi
-
-echo "[14/17] Downloading Gaming Mode shortcut icon..."
+echo "[13/16] Downloading Gaming Mode shortcut icon..."
 
 mkdir ~/arch-deckify
 if [ ! -f ~/arch-deckify/steamdeck-gaming-return.png ]; then
@@ -216,14 +217,12 @@ if [ ! -e "/usr/share/applications/Return_to_Gaming_Mode.desktop" ]; then
     rm -rf "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
 fi
 
-
-
-echo "[15/17] 'Return to Gaming Mode' has been added to desktop and application menu."
+echo "[14/16] 'Return to Gaming Mode' has been added to desktop and application menu."
 
 sudo pacman -S bluez bluez-utils --noconfirm
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
-echo "[16/17] Bluetooth service enabled and started."
+echo "[15/16] Bluetooth service enabled and started."
 
 if command -v flatpak &> /dev/null; then
     echo "Flatpak is already installed."
@@ -264,6 +263,6 @@ cat <<EOL > "$update_script_path"
 konsole -e bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+A or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e \"\n\e[93mPlease do not close before the update is finished.\e[0m\n\"; yay -Syu --sudoloop --noconfirm; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &> /dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e \"\e[93mFinished. This window will be closed in 5 seconds...\e[0m\"; sleep 5; exit" || gnome-terminal -- bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+A or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e \"\e[93mPlease do not close before the update is finished.\e[0m\"; yay -Syu --sudoloop --noconfirm; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &> /dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e \"\n\e[93mExecuted. This window will be closed in 5 seconds...\e[0m\n\"; sleep 5; exit"
 EOL
 chmod +x "$update_script_path"
-echo "[17/17] 'system_update.sh' has been added to $update_script_path"
+echo "[16/16] 'system_update.sh' has been added to $update_script_path"
 echo -e "\n\n\e[1;33mInstallation is complete. You can try by clicking Gaming Mode shortcut.\e[0m"
 echo -e "\e[37mYou can update the system in Steam by adding the ~/arch-deckify/system_update.sh file to Steam as a non-Steam game while in desktop mode (Konsole or Gnome Terminal should be installed.). Unfortunately, system updates are not possible through Steam settings.\e[0m\n\n"
