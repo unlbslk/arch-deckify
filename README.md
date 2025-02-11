@@ -1,3 +1,5 @@
+<img src="https://8upload.com/image/67ab4bf9294f2/20250211_160619.png" alt="Banner" width="100" />
+
 # 🎮 Arch-Deckify
 A script to easily set up a SteamOS-like gaming environment on Arch Linux.
 This script is designed to bring SteamOS-style session switching to Arch Linux. It automates the installation and setup of a **Gaming Mode (Gamescope)** and a **Desktop Mode (Wayland session)**, along with configuration for **SDDM** and several optional components.
