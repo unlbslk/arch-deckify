@@ -1,4 +1,11 @@
-<img src="https://8upload.com/image/67ab4bf9294f2/20250211_160619.png" alt="Banner" width="100" />
+<div align="center">
+	<br />
+	<p>
+	<img src="https://8upload.com/image/67ab4bf9294f2/20250211_160619.png" width="500" alt="Banner" /></a>
+	</p>
+	<br />
+	<p>
+</div>
 
 # 🎮 Arch-Deckify
 A script to easily set up a SteamOS-like gaming environment on Arch Linux.
