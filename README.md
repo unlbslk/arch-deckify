@@ -1,3 +1,4 @@
+
 <div align="center">
 	<br />
 	<p>
@@ -55,6 +56,12 @@ You can also switch between Gaming Mode and Desktop Mode easily using the Steam 
 ```bash
 curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/change_default_desktop.sh > deckify_change_default_desktop.sh && bash deckify_change_default_desktop.sh; rm -rf deckify_change_default_desktop.sh
 ```
+
+### Updating System
+You can update the system in Steam by adding the `~/arch-deckify/system_update.sh` file to Steam as a non-Steam game while in desktop mode.
+> In order for the system update script to work, at least one of the supported terminals (konsole, gnome-terminal, kitty, alacritty) must be installed.
+
+**Unfortunately, system updates are not possible through Steam settings.**
 
 ### Decky Plugin Loader
 The Decky Loader is an **unofficial** community-driven tool that allows you to install and manage plugins for your Steam interface. While not essential for system functionality, it provides additional customization options for SteamOS. (https://decky.xyz/)
