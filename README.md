@@ -28,7 +28,7 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 - KDE Plasma Desktop (<ins>Other desktops are also supported</ins>, but KDE Plasma is recommended for the best experience.)
 
 
-## 🧭 How to install?
+# 🧭 How to install?
 
 **Run this code in your terminal and follow the instructions:**
 ```bash
@@ -59,7 +59,7 @@ curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main
 
 ### Updating System
 You can update the system in Steam by adding the `~/arch-deckify/system_update.sh` file to Steam as a non-Steam game while in desktop mode.
-> In order for the system update script to work, at least one of the supported terminals (konsole, gnome-terminal, kitty, alacritty) must be installed.
+> In order for the system update script to work, at least one of the supported terminals (konsole, gnome-terminal, kitty, alacritty, xfce4-terminal) must be installed.
 
 **Unfortunately, system updates are not possible through Steam settings.**
 
