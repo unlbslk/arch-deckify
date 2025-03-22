@@ -42,6 +42,24 @@ while true; do
   fi
 done
 
+if [ ! -f "/usr/local/bin/steam-powerbuttond" ]; then
+    echo -e "\n\n\e[0;33mWould you like to install steam-powerbuttond? This script enables your device's power button to function like a Steam Deck. Without it, the power button will only turn off the device.\nIf you're using a handheld device, we recommend installing it for enhanced functionality. If you're on a desktop or HTPC, installation is not necessary.\e[0m"
+    echo -e "\e[36mINFO: \e[0mThe script will be automatically fetched from: https://github.com/ShadowBlip/steam-powerbuttond"
+    read -p "(y/n): " choice
+    if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
+        sudo pacman -S git --noconfirm
+        git clone https://github.com/ShadowBlip/steam-powerbuttond.git
+        cd steam-powerbuttond
+        chmod +x install.sh
+        bash install.sh
+        cd ..
+        rm -rf steam-powerbuttond
+    else
+        echo "Skipped."
+    fi
+else
+    echo "steam-powerbuttond is already installed. (SKIPPED)"
+fi
 
 echo "[1/18] Checking if yay is installed..."
 if ! command -v yay &> /dev/null; then
