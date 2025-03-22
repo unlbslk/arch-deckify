@@ -42,25 +42,6 @@ while true; do
   fi
 done
 
-if [ ! -f "/usr/local/bin/steam-powerbuttond" ]; then
-    echo -e "\n\n\e[0;33mWould you like to install steam-powerbuttond? This script enables your device's power button to function like a Steam Deck. Without it, the power button will only turn off the device.\nIf you're using a handheld device, we recommend installing it for enhanced functionality. If you're on a desktop or HTPC, installation is not necessary.\e[0m"
-    echo -e "\e[36mINFO: \e[0mThe script will be automatically fetched from: https://github.com/ShadowBlip/steam-powerbuttond"
-    read -p "(y/n): " choice
-    if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
-        sudo pacman -S git --noconfirm
-        git clone https://github.com/ShadowBlip/steam-powerbuttond.git
-        cd steam-powerbuttond
-        chmod +x install.sh
-        bash install.sh
-        cd ..
-        rm -rf steam-powerbuttond
-    else
-        echo "Skipped."
-    fi
-else
-    echo "steam-powerbuttond is already installed. (SKIPPED)"
-fi
-
 echo "[1/18] Checking if yay is installed..."
 if ! command -v yay &> /dev/null; then
     echo "Installing yay..."
@@ -286,6 +267,25 @@ else
     echo "Decky Loader is already installed. (SKIPPED)"
 fi
 
+if [ ! -f "/usr/local/bin/steam-powerbuttond" ]; then
+    echo -e "\n\n\e[0;33mWould you like to install steam-powerbuttond? This script enables your device's power button to function like a Steam Deck. Without it, the power button will only turn off the device.\n\e[1;33mIf you're using a handheld device, we recommend installing it for enhanced functionality. If you're on a desktop or HTPC, installation is not necessary.\e[0m"
+    echo -e "\e[36mINFO: \e[0mThe script will be automatically fetched from: https://github.com/ShadowBlip/steam-powerbuttond"
+    read -p "(y/n): " choice
+    if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
+        sudo pacman -S git --noconfirm
+        git clone https://github.com/ShadowBlip/steam-powerbuttond.git
+        cd steam-powerbuttond
+        chmod +x install.sh
+        bash install.sh
+        cd ..
+        rm -rf steam-powerbuttond
+    else
+        echo "Skipped."
+    fi
+else
+    echo "steam-powerbuttond is already installed. (SKIPPED)"
+fi
+
 
 update_script_path="$HOME/arch-deckify/system_update.sh"
 cat <<EOL > "$update_script_path"
@@ -296,5 +296,5 @@ EOL
 chmod +x "$update_script_path"
 echo "[18/18] 'system_update.sh' has been added to $update_script_path"
 echo -e "\n\n\e[1;33mInstallation is complete. We recommend you to reboot your system.\e[0m"
-echo -e "\n\e[1;33m.You can try by clicking Gaming Mode shortcut.\e[0m"
+echo -e "\n\e[1;33mYou can try by clicking Gaming Mode shortcut.\e[0m"
 echo -e "\n\e[37mYou can update the system in Steam by adding the ~/arch-deckify/system_update.sh file to Steam as a non-Steam game while in desktop mode.\nUnfortunately, system updates are not possible through Steam settings.\e[0m\n\n"
