@@ -2,7 +2,7 @@
 <div align="center">
 	<br />
 	<p>
-	<img src="https://i.ibb.co/DPMc5Zzc/20250323-233103.png" width="500" alt="Banner" /></a>
+	<img src="https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/banner.png" width="500" alt="Banner" /></a>
 	</p>
 	<br />
 	<p>
