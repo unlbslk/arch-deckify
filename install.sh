@@ -201,6 +201,11 @@ if [ ! -f ~/arch-deckify/steamdeck-gaming-return.png ]; then
 else
   echo "Icon already exists. (SKIPPED)"
 fi
+if [ ! -f ~/arch-deckify/helper.png ]; then
+  wget -P ~/arch-deckify/ https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/icons/helper.png
+else
+  echo "Icon already exists. (SKIPPED)"
+fi
 
 # Desktop icon
 if [ ! -e "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop" ]; then
@@ -213,7 +218,18 @@ if [ ! -e "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop" ]; then
     StartupNotify=false" > "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop"
 fi
 
+if [ ! -e "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop" ]; then
+    echo "[Desktop Entry]
+    Name=Deckify Helper
+    Exec=curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash
+    Icon=$HOME/arch-deckify/helper.png
+    Terminal=true
+    Type=Application
+    StartupNotify=false" > "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop"
+fi
+
 chmod +x "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop"
+chmod +x "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop"
 
 # Application
 if [ ! -e "/usr/share/applications/Return_to_Gaming_Mode.desktop" ]; then
@@ -229,7 +245,20 @@ if [ ! -e "/usr/share/applications/Return_to_Gaming_Mode.desktop" ]; then
     rm -rf "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
 fi
 
-echo "[16/18] 'Return to Gaming Mode' has been added to desktop and application menu."
+if [ ! -e "/usr/share/applications/Deckify_Tools.desktop" ]; then
+    echo "[Desktop Entry]
+    Name=Deckify Helper
+    Exec=curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash
+    Icon=$HOME/arch-deckify/helper.png
+    Terminal=true
+    Type=Application
+    StartupNotify=false" > "$(xdg-user-dir)/Deckify_Tools.desktop.desktop"
+    chmod +x "$(xdg-user-dir)/Deckify_Tools.desktop.desktop"
+    sudo cp "$(xdg-user-dir)/Deckify_Tools.desktop.desktop" "/usr/share/applications/"
+    rm -rf "$(xdg-user-dir)/Deckify_Tools.desktop.desktop"
+fi
+
+echo "[16/18] 'Return to Gaming Mode' and 'Helper 'has been added to desktop and application menu."
 
 sudo pacman -S bluez bluez-utils --noconfirm
 sudo systemctl enable bluetooth.service
