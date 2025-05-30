@@ -198,7 +198,8 @@ EOF
                 echo "# Removing gamescope-session-steam-git..."
                 yay -Rns --noconfirm gamescope-session-steam-git || paru -Rns --noconfirm gamescope-session-steam-git
                 sleep 1
-                echo "# Removing arch-deckify folder..."
+                echo "# Removing arch-deckify..."
+                run_with_sudo rm -rf "/etc/sudoers.d/sddm_config_edit"
                 rm -rf "${HOME}/arch-deckify"
                 sleep 1
                 echo "# Removing gamescope..."
