@@ -197,7 +197,7 @@ echo "[15/18] Downloading Gaming Mode shortcut icon..."
 
 mkdir ~/arch-deckify
 if [ ! -f ~/arch-deckify/steamdeck-gaming-return.png ]; then
-  wget -P ~/arch-deckify/ https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/icons/steamdeck-gaming-return.png
+  wget -P ~/arch-deckify/ https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/icons/steam-gaming-return.png
 else
   echo "Icon already exists. (SKIPPED)"
 fi
@@ -212,7 +212,7 @@ if [ ! -e "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop" ]; then
     echo "[Desktop Entry]
     Name=Gaming Mode
     Exec=steamos-session-select gamescope
-    Icon=$HOME/arch-deckify/steamdeck-gaming-return.png
+    Icon=$HOME/arch-deckify/steam-gaming-return.png
     Terminal=false
     Type=Application
     StartupNotify=false" > "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop"
@@ -236,7 +236,7 @@ if [ ! -e "/usr/share/applications/Return_to_Gaming_Mode.desktop" ]; then
     echo "[Desktop Entry]
     Name=Gaming Mode
     Exec=steamos-session-select gamescope
-    Icon=$HOME/arch-deckify/steamdeck-gaming-return.png
+    Icon=$HOME/arch-deckify/steam-gaming-return.png
     Terminal=false
     Type=Application
     StartupNotify=false" > "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
@@ -264,56 +264,6 @@ sudo pacman -S bluez bluez-utils --noconfirm
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
 echo "[17/18] Bluetooth service enabled and started."
-
-if command -v flatpak &> /dev/null; then
-    echo "Flatpak is already installed."
-else
-    echo -e "\n\n\e[95mWould you like to enable the Flathub repository? This will allow you to install applications from the Discover app. \e[0m"
-    read -p "(y/n): " choice
-    if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
-        sudo pacman -S flatpak --noconfirm
-        echo "Installed Flatpak."
-    else
-        echo "Skipped."
-    fi
-fi
-
-if [ ! -f "${HOME}/homebrew/services/PluginLoader" ]; then
-    echo -e "\n\n\e[40mWant to install Decky Loader? With this, you can install plugins to your Steam interface.\e[0m"
-    echo -e "\e[33mWARNING: \e[0mThis is an UNOFFICIAL project created by the community. It is not necessary for your system, and you may encounter issues while using it. The choice to install is entirely yours, and any potential problems or risks are your responsibility."
-    read -p "(y/n): " choice
-    if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
-        sudo pacman -S jq --noconfirm
-        curl -L https://github.com/SteamDeckHomebrew/decky-installer/releases/latest/download/install_release.sh | sh
-        sudo sed -i 's~TimeoutStopSec=.*$~TimeoutStopSec=2~g' /etc/systemd/system/plugin_loader.service
-        sudo systemctl daemon-reload
-        sudo systemctl restart plugin_loader.service
-        echo "Installed Decky Loader."
-    else
-        echo "Skipped."
-    fi
-else
-    echo "Decky Loader is already installed. (SKIPPED)"
-fi
-
-if [ ! -f "/usr/local/bin/steam-powerbuttond" ]; then
-    echo -e "\n\n\e[0;33mWould you like to install steam-powerbuttond? This script enables your device's power button to function like a Steam Deck. Without it, the power button will only turn off the device.\n\e[1;33mIf you're using a handheld device, we recommend installing it for enhanced functionality. If you're on a desktop or HTPC, installation is not necessary.\e[0m"
-    echo -e "\e[36mINFO: \e[0mThe script will be automatically fetched from: https://github.com/ShadowBlip/steam-powerbuttond"
-    read -p "(y/n): " choice
-    if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
-        sudo pacman -S git --noconfirm
-        git clone https://github.com/ShadowBlip/steam-powerbuttond.git
-        cd steam-powerbuttond
-        chmod +x install.sh
-        bash install.sh
-        cd ..
-        rm -rf steam-powerbuttond
-    else
-        echo "Skipped."
-    fi
-else
-    echo "steam-powerbuttond is already installed. (SKIPPED)"
-fi
 
 
 update_script_path="$HOME/arch-deckify/system_update.sh"
