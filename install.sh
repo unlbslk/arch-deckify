@@ -252,10 +252,10 @@ if [ ! -e "/usr/share/applications/Deckify_Tools.desktop" ]; then
     Icon=$HOME/arch-deckify/helper.png
     Terminal=true
     Type=Application
-    StartupNotify=false" > "$(xdg-user-dir)/Deckify_Tools.desktop.desktop"
-    chmod +x "$(xdg-user-dir)/Deckify_Tools.desktop.desktop"
-    sudo cp "$(xdg-user-dir)/Deckify_Tools.desktop.desktop" "/usr/share/applications/"
-    rm -rf "$(xdg-user-dir)/Deckify_Tools.desktop.desktop"
+    StartupNotify=false" > "$(xdg-user-dir)/Deckify_Tools.desktop"
+    chmod +x "$(xdg-user-dir)/Deckify_Tools.desktop"
+    sudo cp "$(xdg-user-dir)/Deckify_Tools.desktop" "/usr/share/applications/"
+    rm -rf "$(xdg-user-dir)/Deckify_Tools.desktop"
 fi
 
 echo "[16/18] 'Return to Gaming Mode' and 'Helper 'has been added to desktop and application menu."
