@@ -221,8 +221,8 @@ fi
 if [ ! -e "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop" ]; then
     echo "[Desktop Entry]
     Name=Deckify Helper
-    Exec=bash -c 'curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash
-    Icon=$HOME/arch-deckify/helper.png'
+    Exec=bash -c 'curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash'
+    Icon=$HOME/arch-deckify/helper.png
     Terminal=true
     Type=Application
     StartupNotify=false" > "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop"
