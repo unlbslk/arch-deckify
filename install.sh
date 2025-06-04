@@ -196,7 +196,7 @@ fi
 echo "[15/18] Downloading Gaming Mode shortcut icon..."
 
 mkdir ~/arch-deckify
-if [ ! -f ~/arch-deckify/steamdeck-gaming-return.png ]; then
+if [ ! -f ~/arch-deckify/steam-gaming-return.png ]; then
   wget -P ~/arch-deckify/ https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/icons/steam-gaming-return.png
 else
   echo "Icon already exists. (SKIPPED)"
@@ -221,8 +221,8 @@ fi
 if [ ! -e "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop" ]; then
     echo "[Desktop Entry]
     Name=Deckify Helper
-    Exec=curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash
-    Icon=$HOME/arch-deckify/helper.png
+    Exec=bash -c 'curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash
+    Icon=$HOME/arch-deckify/helper.png'
     Terminal=true
     Type=Application
     StartupNotify=false" > "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop"
@@ -248,7 +248,7 @@ fi
 if [ ! -e "/usr/share/applications/Deckify_Tools.desktop" ]; then
     echo "[Desktop Entry]
     Name=Deckify Helper
-    Exec=curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash
+    Exec='bash -c curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash'
     Icon=$HOME/arch-deckify/helper.png
     Terminal=true
     Type=Application
