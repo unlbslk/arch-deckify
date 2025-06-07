@@ -111,8 +111,7 @@ while true; do
         break
     fi
 
-    tmpfile=$(mktemp)
-    trap 'rm -f "$tmpfile"' EXIT
+    ask_sudo
     echo '#!/usr/bin/bash
 if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
     CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
@@ -138,7 +137,7 @@ if [ "$1" == "plasma" ] || [ "$1" == "desktop" ]; then
         echo "SDDM config file could not be found at ${CONFIG_FILE}."
         exit 1
     fi
-    NEW_SESSION='$selected_de' # For other desktops, change here.
+    NEW_SESSION='${selected_de}' # For other desktops, change here.
     sudo sed -i "s/^Session=.*/Session=${NEW_SESSION}/" "$CONFIG_FILE"
     steam -shutdown
 
@@ -156,11 +155,7 @@ elif [ "$1" == "gamescope" ]; then
 else
     echo "Valid arguments are: plasma, gamescope."
     exit 1
-fi' | sudo tee $tmpfile > /dev/null
-
-
-    ask_sudo
-    run_with_sudo mv "$tmpfile" /usr/bin/steamos-session-select
+fi' | sudo tee /usr/bin/steamos-session-select > /dev/null
     run_with_sudo chmod +x /usr/bin/steamos-session-select
     zenity --info --text="Default desktop session set to '${selected_de}'"
     ;;
