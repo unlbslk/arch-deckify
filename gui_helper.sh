@@ -113,22 +113,51 @@ while true; do
 
     tmpfile=$(mktemp)
     trap 'rm -f "$tmpfile"' EXIT
-
-    cat > "$tmpfile" <<EOF
-#!/bin/bash
-CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
-[ ! -f "\$CONFIG_FILE" ] && CONFIG_FILE="/usr/lib/sddm/sddm.conf.d/default.conf"
-
-if [ "\$1" == "desktop" ]; then
-    sudo sed -i "s/^Session=.*/Session=${selected_de}/" "\$CONFIG_FILE"
-    steam -shutdown
-elif [ "\$1" == "gamescope" ]; then
-    sudo sed -i "s/^Session=.*/Session=gamescope-session-steam/" "\$CONFIG_FILE"
-    loginctl terminate-session \$XDG_SESSION_ID
+    echo '#!/usr/bin/bash
+if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
+    CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
 else
-    echo "Usage: desktop | gamescope"
+    CONFIG_FILE="/usr/lib/sddm/sddm.conf.d/default.conf"
 fi
-EOF
+
+# If no arguments are provided, list valid arguments
+if [ $# -eq 0 ]; then
+    echo "Valid arguments: plasma, gamescope"
+    exit 0
+fi
+
+# If the argument is "plasma"
+# IMPORTANT: If you want to use a desktop environment other than KDE Plasma, do not change the IF command. 
+# Steam always runs this file as "steamos-session-select plasma" to switch to the desktop. 
+# Instead, change the code below that edits the config file.
+
+if [ "$1" == "plasma" ] || [ "$1" == "desktop" ]; then
+    
+    echo "Switching session to Desktop."
+    if [ ! -f "$CONFIG_FILE" ]; then
+        echo "SDDM config file could not be found at ${CONFIG_FILE}."
+        exit 1
+    fi
+    NEW_SESSION='$selected_de' # For other desktops, change here.
+    sudo sed -i "s/^Session=.*/Session=${NEW_SESSION}/" "$CONFIG_FILE"
+    steam -shutdown
+
+# If the argument is "gamescope"
+elif [ "$1" == "gamescope" ]; then
+    
+    echo "Switching session to Gamescope."
+    if [ ! -f "$CONFIG_FILE" ]; then
+        echo "SDDM config file could not be found at ${CONFIG_FILE}."
+        exit 1
+    fi
+    NEW_SESSION="gamescope-session-steam"
+    sudo sed -i "s/^Session=.*/Session=${NEW_SESSION}/" "$CONFIG_FILE"
+    dbus-send --session --type=method_call --print-reply --dest=org.kde.Shutdown /Shutdown org.kde.Shutdown.logout || gnome-session-quit --logout --no-prompt || cinnamon-session-quit --logout --no-prompt || loginctl terminate-session $XDG_SESSION_ID
+else
+    echo "Valid arguments are: plasma, gamescope."
+    exit 1
+fi' | sudo tee $tmpfile > /dev/null
+
 
     ask_sudo
     run_with_sudo mv "$tmpfile" /usr/bin/steamos-session-select
