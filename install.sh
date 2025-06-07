@@ -248,7 +248,7 @@ fi
 if [ ! -e "/usr/share/applications/Deckify_Tools.desktop" ]; then
     echo "[Desktop Entry]
     Name=Deckify Helper
-    Exec='bash -c curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash'
+    Exec=bash -c 'curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash'
     Icon=$HOME/arch-deckify/helper.png
     Terminal=true
     Type=Application
