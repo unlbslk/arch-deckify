@@ -42,15 +42,20 @@ while true; do
   fi
 done
 
-echo "[1/18] Checking if yay is installed..."
-if ! command -v yay &> /dev/null; then
-    echo "Installing yay..."
+echo "[1/18] Checking if yay or paru is installed..."
+
+if command -v yay &> /dev/null; then
+    echo "Yay is already installed. (SKIPPED)"
+elif command -v paru &> /dev/null; then
+    echo "Paru is already installed. (SKIPPED)"
+else
+    echo "Neither yay nor paru found. Installing yay..."
     sudo pacman -S --needed base-devel git --noconfirm
 
     cd ~
     git clone https://aur.archlinux.org/yay.git
     cd yay
-    makepkg -si --noconfirm 
+    makepkg -si --noconfirm
 
     if command -v yay &> /dev/null; then
         echo "Yay has been successfully installed."
@@ -58,8 +63,6 @@ if ! command -v yay &> /dev/null; then
         echo "Failed to install yay."
         exit 1
     fi
-else
-    echo "Yay is already installed. (SKIPPED)"
 fi
 
 echo "[2/18] Checking and enabling multilib repository..."
@@ -82,8 +85,8 @@ else
     echo "Steam is already installed. (SKIPPED)"
 fi
 
-echo "[5/18] Installing gamescope-session-steam-git using yay..."
-yay -S gamescope-session-steam-git --noconfirm --sudoloop
+echo "[5/18] Installing gamescope-session-steam-git from AUR..."
+yay -S gamescope-session-steam-git --noconfirm --sudoloop || paru -S gamescope-session-steam-git --noconfirm
 
 echo "[6/18] Configuring auto-login for SDDM..."
 if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
@@ -269,8 +272,7 @@ echo "[17/18] Bluetooth service enabled and started."
 update_script_path="$HOME/arch-deckify/system_update.sh"
 cat <<EOL > "$update_script_path"
 #!/bin/bash
-
-konsole -e bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+X or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e \"\n\e[93mPlease do not close before the update is finished.\e[0m\n\"; yay -Syu --sudoloop --noconfirm; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &> /dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e \"\e[93mFinished. This window will be closed in 5 seconds...\e[0m\"; sleep 5; exit" || gnome-terminal -- bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+X or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e \"\e[93mPlease do not close before the update is finished.\e[0m\"; yay -Syu --sudoloop --noconfirm; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &> /dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e \"\n\e[93mExecuted. This window will be closed in 5 seconds...\e[0m\n\"; sleep 5; exit" || kgx -- bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+X or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e \"\e[93mPlease do not close before the update is finished.\e[0m\"; yay -Syu --sudoloop --noconfirm; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &> /dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e \"\n\e[93mExecuted. This window will be closed in 5 seconds...\e[0m\n\"; sleep 5; pkill kgx" || kitty bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+X or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e \"\e[93mPlease do not close before the update is finished.\e[0m\"; yay -Syu --sudoloop --noconfirm; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &> /dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e \"\n\e[93mExecuted. This window will be closed in 5 seconds...\e[0m\n\"; sleep 5; exit" || alacritty -e bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+X or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e \"\e[93mPlease do not close before the update is finished.\e[0m\"; yay -Syu --sudoloop --noconfirm; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &> /dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e \"\n\e[93mExecuted. This window will be closed in 5 seconds...\e[0m\n\"; sleep 5; exit"
+AUR_HELPER=""; UPDATE_CMD=""; command -v yay &>/dev/null && AUR_HELPER="yay" && UPDATE_CMD="yay -Syu --sudoloop --noconfirm" || { command -v paru &>/dev/null && AUR_HELPER="paru" && UPDATE_CMD="paru -Syu --noconfirm"; }; [ -z "$AUR_HELPER" ] && echo -e "\e[91mError: Neither yay nor paru is installed.\e[0m" && sleep 10 && exit 1; (konsole -e bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+X or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e '\n\e[93mPlease do not close before the update is finished.\e[0m\n'; $UPDATE_CMD; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &>/dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e '\e[93mFinished. This window will be closed in 5 seconds...\e[0m'; sleep 5; exit") || (gnome-terminal -- bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+X or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e '\e[93mPlease do not close before the update is finished.\e[0m'; $UPDATE_CMD; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &>/dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e '\n\e[93mExecuted. This window will be closed in 5 seconds...\e[0m\n'; sleep 5; exit") || (kgx -- bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+X or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e '\e[93mPlease do not close before the update is finished.\e[0m'; $UPDATE_CMD; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &>/dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e '\n\e[93mExecuted. This window will be closed in 5 seconds...\e[0m\n'; sleep 5; pkill kgx") || (kitty bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+X or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e '\e[93mPlease do not close before the update is finished.\e[0m'; $UPDATE_CMD; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &>/dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e '\n\e[93mExecuted. This window will be closed in 5 seconds...\e[0m\n'; sleep 5; exit") || (alacritty -e bash -c "clear; echo -e '\n\n\e[94mEnter your sudo password:\nYou can open keyboard by pressing GUIDE+X or PS+SQUARE on controller.\n\n\e[0m'; sudo rm -rf /var/lib/pacman/db.lck; echo -e '\e[93mPlease do not close before the update is finished.\e[0m'; $UPDATE_CMD; echo -e '\e[96mSystem packages have been updated.\e[0m'; if flatpak --version &>/dev/null; then echo -e '\n\e[96mUpdating Flathub...\e[0m'; flatpak update -y; echo -e '\e[93mFlatpak updated.\e[0m'; else echo 'Skipped Flatpak.'; fi; echo -e '\n\e[93mExecuted. This window will be closed in 5 seconds...\e[0m\n'; sleep 5; exit")
 EOL
 chmod +x "$update_script_path"
 echo "[18/18] 'system_update.sh' has been added to $update_script_path"
