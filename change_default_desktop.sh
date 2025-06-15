@@ -17,12 +17,8 @@ while true; do
     if echo "$available_desktops" | grep -q -w "^$user_choice"; then
         selected_de="$user_choice"
         echo '#!/usr/bin/bash
-if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
-    CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
-else
-    CONFIG_FILE="/usr/lib/sddm/sddm.conf.d/default.conf"
-fi
 
+CONFIG_FILE="/etc/sddm.conf"
 # If no arguments are provided, list valid arguments
 if [ $# -eq 0 ]; then
     echo "Valid arguments: plasma, gamescope"
