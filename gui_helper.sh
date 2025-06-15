@@ -113,11 +113,7 @@ while true; do
 
     ask_sudo
     echo '#!/usr/bin/bash
-if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
-    CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
-else
-    CONFIG_FILE="/usr/lib/sddm/sddm.conf.d/default.conf"
-fi
+CONFIG_FILE="/etc/sddm.conf"
 
 # If no arguments are provided, list valid arguments
 if [ $# -eq 0 ]; then
@@ -243,11 +239,7 @@ fi' | sudo tee /usr/bin/steamos-session-select > /dev/null
                     echo "Decky Loader is not installed."
                 fi
                 echo "# Disabling SDDM autologin..."
-                if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
-                    CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
-                else
-                    CONFIG_FILE="/usr/lib/sddm/sddm.conf.d/default.conf"
-                fi
+                CONFIG_FILE="/etc/sddm.conf"
                 sudo sed -i "s/^Relogin=true/Relogin=false/; s/^User=.*/User=/; s/^Session=.*/Session=/" "$CONFIG_FILE"
                 sleep 1
                 ) | zenity --progress --title="Uninstalling Script" --width=500 --auto-close --pulsate --no-cancel
