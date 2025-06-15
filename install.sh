@@ -5,7 +5,7 @@ if [ "$EUID" -eq 0 ]; then
     exit 1
 fi
 
-echo -e "\e[1;33mWelcome to Arch SteamOS Script\e[0m"
+echo -e "\e[1;33mWelcome to Arch Deckify Script\e[0m"
 echo -e "\e[91mWarning: This script mostly does not work on NVIDIA cards.\e[0m"
 echo -e "\e[37mThis script has been made to work only on SDDM.\e[0m"
 echo -e "\e[37mYou must make additional changes for other display managers.\e[0m"
@@ -88,13 +88,25 @@ fi
 echo "[5/18] Installing gamescope-session-steam-git from AUR..."
 yay -S gamescope-session-steam-git --noconfirm --sudoloop || paru -S gamescope-session-steam-git --noconfirm
 
+CONFIG_FILE="/etc/sddm.conf"
 echo "[6/18] Configuring auto-login for SDDM..."
-if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
-    CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
-else
-    CONFIG_FILE="/usr/lib/sddm/sddm.conf.d/default.conf"
-fi
-sudo sed -i "s/^Relogin=false/Relogin=true/; s/^User=.*/User=$(whoami)/" "$CONFIG_FILE"
+sudo tee /etc/sddm.conf > /dev/null <<EOF
+[Autologin]
+Relogin=true
+Session=$selected_de
+User=$(whoami)
+
+[General]
+HaltCommand=/usr/bin/systemctl poweroff
+RebootCommand=/usr/bin/systemctl reboot
+
+[Theme]
+Current=
+
+[Users]
+MaximumUid=60513
+MinimumUid=1000
+EOF
 
 echo "Autologin configured for user: $(whoami)"
 
@@ -102,11 +114,7 @@ echo "[7/18] Creating /usr/bin/steamos-session-select"
 
 echo '#!/usr/bin/bash
 
-if [ -f /etc/sddm.conf.d/kde_settings.conf ]; then
-    CONFIG_FILE="/etc/sddm.conf.d/kde_settings.conf"
-else
-    CONFIG_FILE="/usr/lib/sddm/sddm.conf.d/default.conf"
-fi
+CONFIG_FILE="/etc/sddm.conf"
 
 # If no arguments are provided, list valid arguments
 if [ $# -eq 0 ]; then
