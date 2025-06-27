@@ -43,6 +43,29 @@ Please note that running this script may modify important system configurations,
 
 By using this script, you acknowledge that **you** are fully responsible for any issues that arise, including but not limited to data loss, system corruption, or any unforeseen consequences. It is highly recommended that you back up your important data and configurations before proceeding. Use this script at your own risk. 
 
+## ⚙️ What this script does:
+
+`1.`Prompts you to choose a default session for desktop mode.
+
+`2.` Installs yay from AUR if neither yay/paru is not installed.
+
+`3.` Enables the multilib repository, updates the system, and installs Steam if it's not already installed.
+
+`4.` Installs gamescope-session-steam-git from the AUR (includes gamescope and other dependencies).
+
+`5.` Generates an sddm.conf file in /etc/ to enable autologin and session switching.
+
+`6.` Adds a sudoers rule to allow session switching without a password.
+
+`7.` Creates a steamos-session-select file, allowing switching back to desktop mode from within Steam.
+
+`8.` Installs these packages: gamescope, mangohud(for FPS counter), wget, ntfs-3g(for NTFS drive support)
+
+`9.` Adds a udev rule for backlight control, enabling brightness adjustment within Steam.
+
+`10.` Creates desktop and application shortcuts for Gaming Mode and a GUI Helper, adds a system update script, and enables Bluetooth services.
+
+The GUI Helper allows you to manually install additional tools like Decky Loader.
 
 ### Session Switching
 **The** `steamos-session-select` **command allows you to switch between Gamescope (Gaming Mode) and your selected Wayland session. Example usage:**
