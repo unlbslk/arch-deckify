@@ -293,7 +293,7 @@ Are you sure you want to continue?"
                     echo "Latest steamdeck-kde-presets package is: $latest"
                     echo "Downloading..."
                     mkdir -p "${HOME}/arch-deckify"
-                    curl -o "${HOME}/arch-deckify" "${url}${latest}"
+                    curl -o "${HOME}/arch-deckify/${latest}" "${url}${latest}"
                     echo "Downloaded: $latest"
                     echo "# Installing latest version..."
                     sudo tar -I zstd -xvf  "${HOME}/arch-deckify/${latest}" -C /
