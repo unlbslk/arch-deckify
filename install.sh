@@ -86,7 +86,7 @@ else
 fi
 
 echo "[5/18] Installing gamescope-session-steam-git from AUR..."
-yay -S gamescope-session-steam-git --noconfirm --sudoloop || paru -S gamescope-session-steam-git --noconfirm
+yay -S --aur gamescope-session-steam-git --noconfirm --sudoloop || paru -S --aur gamescope-session-steam-git --noconfirm
 
 CONFIG_FILE="/etc/sddm.conf"
 echo "[6/18] Configuring auto-login for SDDM..."
