@@ -20,6 +20,7 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 - **Shortcut Creation**: Adds a desktop shortcut for easy switching to Gaming Mode.
 - **Optional Tools**: Offers installation of **Flatpak**, **Decky Loader**.
 - **Session Switcher**: Shortcuts to easily switch between desktop and game mode.
+- **Easy To Uninstall**: You can uninstall the script easily.
 
 ## ⛓️ Requirements:
 - Arch Linux (or an Arch-based distribution)
@@ -103,3 +104,4 @@ curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main
 ## Disclaimer
 
 All logos, trademarks, and names related to **Steam**, **SteamOS**, **Steam Deck**, **Valve**, **Deckify** and other software such as **Plasma** and **Arch** are the property of their respective owners. These logos and names are used for reference and informational purposes only. This project is not affiliated with, endorsed, or sponsored by **Valve**, **Steam**, **SteamOS**, **Steam Deck**, **Plasma**, **Arch Linux**, **Flatpak**, **Decky Loader**, **Deckify** or any of their respective organizations. All rights reserved to the original trademark holders.
+
