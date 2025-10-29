@@ -32,11 +32,10 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 
 # 🧭 How to install?
 
-**Run this code in your terminal and follow the instructions:**
+**Run this command in your terminal and follow the instructions:**
 ```bash
-curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh > deckify_install.sh && bash deckify_install.sh; rm -rf deckify_install.sh
+bash <(curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh)
 ```
-And that's all!
 
 ## ⚠️ Important Notice (READ BEFORE INSTALLING)
 
@@ -79,7 +78,7 @@ You can also switch between Gaming Mode and Desktop Mode easily using the Steam 
 ### Change Default Desktop
 **To change the session used when switching to Desktop Mode, run the following script:**
 ```bash
-curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/change_default_desktop.sh > deckify_change_default_desktop.sh && bash deckify_change_default_desktop.sh; rm -rf deckify_change_default_desktop.sh
+bash <(curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/change_default_desktop.sh)
 ```
 
 ### Updating System
@@ -94,14 +93,15 @@ Please note that it is **not an official tool** and may cause issues. Any potent
 
 **To install Decky Loader:**
 ```bash
-curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/setup_deckyloader.sh > setup_deckyloader.sh && bash setup_deckyloader.sh; rm -rf setup_deckyloader.sh
+bash <(curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/setup_deckyloader.sh)
 ```
 **To remove Decky Loader:**
 ```bash
-curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/remove_deckyloader.sh > remove_deckyloader.sh && bash remove_deckyloader.sh; rm -rf remove_deckyloader.sh
+bash <(curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/remove_deckyloader.sh)
 ```
 
 ## Disclaimer
 
 All logos, trademarks, and names related to **Steam**, **SteamOS**, **Steam Deck**, **Valve**, **Deckify** and other software such as **Plasma** and **Arch** are the property of their respective owners. These logos and names are used for reference and informational purposes only. This project is not affiliated with, endorsed, or sponsored by **Valve**, **Steam**, **SteamOS**, **Steam Deck**, **Plasma**, **Arch Linux**, **Flatpak**, **Decky Loader**, **Deckify** or any of their respective organizations. All rights reserved to the original trademark holders.
+
 
