@@ -29,10 +29,10 @@ jobs:
         run: |
           git fetch origin docs
           git checkout docs
-          rm -rf site_build
+          rm -rf gh_pages
           mkdocs build --clean
-          git add site_build
-          git commit -m "Update site_build [ci skip]" || echo "No changes to commit"
+          git add gh_pages
+          git commit -m "Update gh_pages [ci skip]" || echo "No changes to commit"
           git push origin docs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
