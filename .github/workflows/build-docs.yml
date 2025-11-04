@@ -25,16 +25,12 @@ jobs:
         run: |
           pip install mkdocs mkdocs-material
 
-      - name: Build site
-        run: |
-          mkdocs build --clean
-
-      - name: Deploy updated site_build
+      - name: Build and Deploy
         run: |
           git fetch origin docs
           git checkout docs
           rm -rf site_build
-          cp -r site_build site_build
+          mkdocs build --clean
           git add site_build
           git commit -m "Update site_build [ci skip]" || echo "No changes to commit"
           git push origin docs
