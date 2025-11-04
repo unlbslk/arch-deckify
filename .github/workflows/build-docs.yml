@@ -27,6 +27,8 @@ jobs:
 
       - name: Build and Deploy
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git fetch origin docs
           git checkout docs
           rm -rf gh_pages
