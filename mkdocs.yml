@@ -1,0 +1,53 @@
+site_name: Arch Deckify
+docs_dir: docs
+site_dir: site_build
+theme:
+  favicon: archdeckicon.ico
+  name: material
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.code.line_numbers
+  logo: images/archdeckicon.png
+
+repo_name: unlbslk/arch-deckify
+repo_url: https://github.com/unlbslk/arch-deckify
+
+nav:
+  - Home: index.md
+  - Requirements: requirements.md
+  - Installation: installation.md
+  - Issues: issues.md
+  - GUI Helper: guihelper.md
+  - Updating System: updatingsystem.md
+  - Automounting: automount.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+extra:
+  static:
+    - robots.txt
