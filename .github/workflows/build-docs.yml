@@ -1,12 +1,9 @@
-name: Build docs page
+name: Rebuild Docs
 
 on:
   push:
     branches:
       - docs
-    paths:
-      - "docs/**"
-      - "mkdocs.yml"
   workflow_dispatch:
 
 jobs:
