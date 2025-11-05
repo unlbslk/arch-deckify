@@ -31,10 +31,10 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git fetch origin docs
           git checkout docs
-          rm -rf gh_pages
+          rm -rf docs
           mkdocs build --clean
-          git add gh_pages
-          git commit -m "Update gh_pages [ci skip]" || echo "No changes to commit"
+          git add docs
+          git commit -m "Update docs [ci skip]" || echo "No changes to commit"
           git push origin docs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
