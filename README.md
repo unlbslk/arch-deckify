@@ -11,7 +11,7 @@
 # 🎮 Arch-Deckify
 A script to easily set up a SteamOS-like gaming environment on Arch Linux.
 This script is designed to bring SteamOS-style session switching to Arch Linux. It automates the installation and setup of a **Gaming Mode (Gamescope)** and a **Desktop Mode (Wayland session)**, along with configuration for **SDDM** and several optional components.
-
+> 🌐 For more information, see the documents page: https://unlbslk.github.io/arch-deckify/
 ## 📌 Features:
 - **Wayland Session Selector**: Allows you to choose a desktop session for your system.
 - **Gamescope Gaming Mode**: Switch to a full-screen gaming experience similar to SteamOS. It uses [gamescope-session-steam](https://github.com/ChimeraOS/gamescope-session-steam) (Thanks to ChimeraOS team for this).
@@ -106,6 +106,7 @@ bash <(curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/hea
 ## Disclaimer
 
 All logos, trademarks, and names related to **Steam**, **SteamOS**, **Steam Deck**, **Valve**, **Deckify** and other software such as **Plasma** and **Arch** are the property of their respective owners. These logos and names are used for reference and informational purposes only. This project is not affiliated with, endorsed, or sponsored by **Valve**, **Steam**, **SteamOS**, **Steam Deck**, **Plasma**, **Arch Linux**, **Flatpak**, **Decky Loader**, **Deckify** or any of their respective organizations. All rights reserved to the original trademark holders.
+
 
 
 
