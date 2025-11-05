@@ -37,6 +37,9 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 bash <(curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh)
 ```
 
+> ℹ️ See the docs for more information: https://unlbslk.github.io/arch-deckify/installation/
+
+
 ## ⚠️ Important Notice (READ BEFORE INSTALLING)
 
 Please note that running this script may modify important system configurations, files, and settings. In some cases, it could lead to system instability, configuration loss, or make the system unbootable. Restoring the system to a working state may require advanced technical knowledge. Before executing directly, check the content of the script.
@@ -103,5 +106,6 @@ bash <(curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/hea
 ## Disclaimer
 
 All logos, trademarks, and names related to **Steam**, **SteamOS**, **Steam Deck**, **Valve**, **Deckify** and other software such as **Plasma** and **Arch** are the property of their respective owners. These logos and names are used for reference and informational purposes only. This project is not affiliated with, endorsed, or sponsored by **Valve**, **Steam**, **SteamOS**, **Steam Deck**, **Plasma**, **Arch Linux**, **Flatpak**, **Decky Loader**, **Deckify** or any of their respective organizations. All rights reserved to the original trademark holders.
+
 
 
