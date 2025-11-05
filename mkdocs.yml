@@ -1,6 +1,6 @@
 site_name: Arch Deckify
-docs_dir: docs
-site_dir: gh_pages
+docs_dir: docs_src
+site_dir: docs
 theme:
   favicon: archdeckicon.ico
   name: material
