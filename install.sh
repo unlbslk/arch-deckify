@@ -11,7 +11,7 @@ echo -e "\e[37mThis script has been made to work only on SDDM.\e[0m"
 echo -e "\e[37mYou must make additional changes for other display managers.\e[0m"
 
 if ! pacman -Qs sddm > /dev/null; then
-    echo "SDDM is not installed. (EXITING)"
+    echo "SDDM is not found. (see: https://unlbslk.github.io/arch-deckify/issues/#what-is-the-sddm-and-how-can-i-install-it)"
     exit 1
 else
     echo "SDDM is installed."
