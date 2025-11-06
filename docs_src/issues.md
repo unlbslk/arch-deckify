@@ -67,5 +67,3 @@ flatpak install flathub org.pulseaudio.pavucontrol
 ## Black Screen in Multiple Display Setups
 !!! info
 	Since the Gamescope is designed to work only in single-display mode, it may not work in multi-display setups.
-
-- 
