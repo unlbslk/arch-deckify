@@ -10,21 +10,21 @@
 
 # 🎮 Arch-Deckify
 A script to easily set up a SteamOS-like gaming environment on Arch Linux.
-This script is designed to bring SteamOS-style session switching to Arch Linux. It automates the installation and setup of a **Gaming Mode (Gamescope)** and a **Desktop Mode (Wayland session)**, along with configuration for **SDDM** and several optional components.
+This script is designed to bring SteamOS-style session switching to Arch Linux. It automates the installation and setup of a **Gaming Mode (Gamescope)** and a **Desktop Mode (Wayland session)**, along with configuration for **Plasma Login Manager** and several optional components.
 > 🌐 For more information, see the documents page: https://unlbslk.github.io/arch-deckify/
 ## 📌 Features:
 - **Wayland Session Selector**: Allows you to choose a desktop session for your system.
 - **Gamescope Gaming Mode**: Switch to a full-screen gaming experience similar to SteamOS. It uses [gamescope-session-steam](https://github.com/ChimeraOS/gamescope-session-steam) (Thanks to ChimeraOS team for this).
 - **GUI Helper**: Easy configuration with GUI made with Zenity.
-- **SDDM Configuration**: Automatically configures SDDM for autologin.
+- **Login Manager Configuration**: Automatically configures Plasma Login Manager for autologin.
 - **Shortcut Creation**: Adds a desktop shortcut for easy switching to Gaming Mode.
 - **Optional Tools**: Offers installation of **Flatpak**, **Decky Loader**.
 - **Session Switcher**: Shortcuts to easily switch between desktop and game mode.
-- **Easy To Uninstall**: You can uninstall the script easily.
+- **Easy To Uninstall**: You can uninstall the script from GUI Helper.
 
 ## ⛓️ Requirements:
 - Arch Linux (or an Arch-based distribution)
-- SDDM display manager
+- Plasma Login Manager
 - A compatible GPU (NVIDIA hardware may face issues)
 - A gamepad for best UI experience
 - KDE Plasma Desktop (<ins>Other desktops are also supported</ins>, but KDE Plasma is recommended for the best experience.)
@@ -56,7 +56,7 @@ By using this script, you acknowledge that **you** are fully responsible for any
 
 `4.` Installs gamescope-session-steam-git from the AUR (includes gamescope and other dependencies).
 
-`5.` Generates an sddm.conf file in /etc/ to enable autologin and session switching.
+`5.` Generates an plasmalogin.conf file in /etc/ to enable autologin and session switching.
 
 `6.` Adds a sudoers rule to allow session switching without a password.
 
