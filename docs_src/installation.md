@@ -1,7 +1,7 @@
 ## Install Arch-Deckify
 - To start the installation, open a terminal window and run the following command:
 ```bash
-bash <(curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh)" --
 ```
 
 - After you enter your sudo password, the script will ask you which desktop environment you want to use as desktop mode:
