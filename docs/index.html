@@ -759,14 +759,14 @@
 
 <h1 id="arch-deckify">Arch Deckify</h1>
 <p>A script to easily set up a SteamOS-like gaming environment on Arch Linux.
-This script is designed to bring SteamOS-style session switching to Arch Linux. It automates the installation and setup of a <strong>Gaming Mode (Gamescope)</strong> and a <strong>Desktop Mode (Wayland session)</strong>, along with configuration for <strong>Plasma Login Manager</strong> and several optional components.</p>
+This script is designed to bring SteamOS-style session switching to Arch Linux. It automates the installation and setup of a <strong>Gaming Mode (Gamescope)</strong> and a <strong>Desktop Mode (Wayland session)</strong>, along with configuration for <strong>SDDM</strong> and several optional components.</p>
 <p><img alt="Banner" src="https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/banner.png" /></p>
 <h2 id="features">📌 Features</h2>
 <ul>
 <li><strong>Wayland Session Selector</strong>: Allows you to choose a desktop session for your system.</li>
 <li><strong>Gamescope Gaming Mode</strong>: Switch to a full-screen gaming experience similar to SteamOS. It uses <a href="https://github.com/ChimeraOS/gamescope-session-steam">gamescope-session-steam</a> (Thanks to ChimeraOS team for this).</li>
 <li><strong>GUI Helper</strong>: Easy configuration with GUI made with Zenity.</li>
-<li><strong>Login Manager Configuration</strong>: Automatically configures Plasma Login Manager for autologin.</li>
+<li><strong>Login Manager Configuration</strong>: Automatically configures SDDM for autologin.</li>
 <li><strong>Shortcut Creation</strong>: Adds a desktop shortcut for easy switching to Gaming Mode.</li>
 <li><strong>Optional Tools</strong>: Offers installation of <strong>Flatpak</strong>, <strong>Decky Loader</strong>.</li>
 <li><strong>Session Switcher</strong>: Shortcuts to easily switch between desktop and game mode.</li>
@@ -775,14 +775,14 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 <h2 id="requirements">⛓️ Requirements</h2>
 <ul>
 <li>Arch Linux (or an Arch-based distribution)</li>
-<li>Plasma Login Manager</li>
+<li>SDDM display manager</li>
 <li>A compatible GPU (NVIDIA hardware may face issues)</li>
 <li>A gamepad for best UI experience</li>
 <li>KDE Plasma Desktop (<ins>Other desktops are also supported</ins>, but KDE Plasma is recommended for the best experience.)</li>
 </ul>
 <h2 id="how-to-install">🧭 How to Install</h2>
 <p><strong>Run this command in your terminal and follow the instructions:</strong>
-<div class="highlight"><pre><span></span><code>bash<span class="w"> </span>&lt;<span class="o">(</span>curl<span class="w"> </span>-sSL<span class="w"> </span>https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh<span class="o">)</span>
+<div class="highlight"><pre><span></span><code>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/install.sh<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>--
 </code></pre></div>
 <img alt="Installation" src="images/installation.png" /></p>
 <div class="admonition info">
@@ -800,7 +800,7 @@ This script is designed to bring SteamOS-style session switching to Arch Linux. 
 <p><code>2.</code> Installs yay from AUR if neither yay/paru is not installed.</p>
 <p><code>3.</code> Enables the multilib repository, updates the system, and installs Steam if it's not already installed.</p>
 <p><code>4.</code> Installs gamescope-session-steam-git from the AUR (includes gamescope and other dependencies).</p>
-<p><code>5.</code> Generates an plasmalogin.conf file in /etc/ to enable autologin and session switching.</p>
+<p><code>5.</code> Generates an sddm.conf file in /etc/ to enable autologin and session switching.</p>
 <p><code>6.</code> Adds a sudoers rule to allow session switching without a password.</p>
 <p><code>7.</code> Creates a steamos-session-select file, allowing switching back to desktop mode from within Steam.</p>
 <p><code>8.</code> Installs these packages: gamescope, mangohud(for FPS counter), wget, ntfs-3g(for NTFS drive support)</p>
