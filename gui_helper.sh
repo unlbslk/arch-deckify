@@ -113,7 +113,7 @@ while true; do
 
     ask_sudo
     echo '#!/usr/bin/bash
-CONFIG_FILE="/etc/plasmalogin.conf"
+CONFIG_FILE="/etc/sddm.conf"
 
 # If no arguments are provided, list valid arguments
 if [ $# -eq 0 ]; then
@@ -130,7 +130,7 @@ if [ "$1" == "plasma" ] || [ "$1" == "desktop" ]; then
     
     echo "Switching session to Desktop."
     if [ ! -f "$CONFIG_FILE" ]; then
-        echo "Plasma Login Manager config file could not be found at ${CONFIG_FILE}."
+        echo "SDDM config file could not be found at ${CONFIG_FILE}."
         exit 1
     fi
     NEW_SESSION='${selected_de}' # For other desktops, change here.
@@ -142,7 +142,7 @@ elif [ "$1" == "gamescope" ]; then
     
     echo "Switching session to Gamescope."
     if [ ! -f "$CONFIG_FILE" ]; then
-        echo "Plasma Login Manager config file could not be found at ${CONFIG_FILE}."
+        echo "SDDM Manager config file could not be found at ${CONFIG_FILE}."
         exit 1
     fi
     NEW_SESSION="gamescope-session-steam"
@@ -210,7 +210,7 @@ fi' | sudo tee /usr/bin/steamos-session-select > /dev/null
             ;;
         "Uninstall Script")
             zenity --question --title="Uninstall Deckify Script" \
-                --text="Are you sure to uninstall this script?\n\nThese will be REMOVED from your system (if installed):\n\n- Gamescope session\n- Gamescope package\n- Decky Loader\n- Gaming mode shortcuts\n- Plasma Login Manager autologin (will be disabled)\n\nThese will NOT BE REMOVED from your system:\n\n- Steam\n- MangoHUD\n- Flatpak\n- Yay/Paru (AUR Helper)\n- ntfs-3g (NTFS Drivers)\n- Bluetooth services\n- KDE Plasma configs/themes etc."
+                --text="Are you sure to uninstall this script?\n\nThese will be REMOVED from your system (if installed):\n\n- Gamescope session\n- Gamescope package\n- Decky Loader\n- Gaming mode shortcuts\n- SDDM autologin (will be disabled)\n\nThese will NOT BE REMOVED from your system:\n\n- Steam\n- MangoHUD\n- Flatpak\n- Yay/Paru (AUR Helper)\n- ntfs-3g (NTFS Drivers)\n- Bluetooth services\n- KDE Plasma configs/themes etc."
 
             if [ $? -eq 0 ]; then
                 ask_sudo
@@ -238,8 +238,8 @@ fi' | sudo tee /usr/bin/steamos-session-select > /dev/null
                 else
                     echo "Decky Loader is not installed."
                 fi
-                echo "# Disabling Plasma Login Manager autologin..."
-                CONFIG_FILE="/etc/plasmalogin.conf"
+                echo "# Disabling SDDM autologin..."
+                CONFIG_FILE="/etc/sddm.conf"
                 sudo sed -i "s/^Relogin=true/Relogin=false/; s/^User=.*/User=/; s/^Session=.*/Session=/" "$CONFIG_FILE"
                 sleep 1
                 ) | zenity --progress --title="Uninstalling Script" --width=500 --auto-close --pulsate --no-cancel
