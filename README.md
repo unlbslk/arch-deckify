@@ -39,6 +39,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/
 
 > ℹ️ See the docs for more information: https://unlbslk.github.io/arch-deckify/installation/
 
+![Installation](https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/docs/docs_src/images/installation.png)
+
 
 ## ⚠️ Important Notice (READ BEFORE INSTALLING)
 
