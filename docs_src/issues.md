@@ -3,7 +3,7 @@
 ## When I switch to Gaming Mode it takes me back to the desktop
 - The Gamescope session may fail to start for some reason.
 - Alternatively, there might be an issue with the shortcut used to switch to Game Mode. Try switching manually by running `steamos-session-select gamescope`  in the terminal.
-- Another possibility is that there may be an issue with the Plasma Login Manager configuration file. Try editing the config file, which is usually located at `/etc/plasmalogin.conf`.
+- Another possibility is that there may be an issue with the SDDM configuration file. Try editing the config file, which is usually located at `/etc/sddm.conf`.
 
 ## Stuck on a Black Screen, Cannot return to Desktop again
 !!! info
@@ -11,23 +11,23 @@
 - The Gamescope session may fail to start for some reason, and now it shows a black screen.
 - Your hardware may not be supported. If you want to remove the script, you can use the **Uninstall** option in GUI Helper.
 
-## What is the Plasma Login Manager and how can I install it?
-- **Plasma Login Manager** is a display manager for Linux that handles graphical login, allowing you to choose a user account and start a desktop session.
+## What is the SDDM and how can I install it?
+- **SDDM** is a display manager for Linux that handles graphical login, allowing you to choose a user account and start a desktop session.
 - Display managers are the login screen that appears when you start your system.
 - It is usually included by default on systems with the KDE Plasma desktop.
-- The script switches between desktop mode and gaming mode by editing Plasma Login Manager's config file each time.
-- If Plasma Login Manager is not available on your system, firstly you need to know and uninstall the display manager you're currently using. 
+- The script switches between desktop mode and gaming mode by editing SDDM's config file each time.
+- If SDDM is not available on your system, firstly you need to know and uninstall the display manager you're currently using. 
 > - You can see the current display manager with the `systemctl status display-manager` command.
 > - In the `Loaded:` section you will see the current display manager `(like gdm.service or lightdm.service)`
 > 	![Display Manager Service](images/displaymanager.png)
 > - For example, if you have GDM on your system, to disable it: `sudo systemctl disable gdm.service`
-> - Afterwards, you can install and activate the Plasma Login Manager package with the commands below.
+> - Afterwards, you can install and enable the SDDM package with the commands below.
 
-If Plasma Login Manager is not installed on your system, you can install it with the following command:
+If SDDM is not installed on your system, you can install it with the following command:
 ```bash
 # If you are using another display manager, you must disable it first (explained above).
-sudo pacman -S plasma-login-manager          # installs Plasma Login Manager package
-sudo systemctl enable plasmalogin   # enables Plasma Login Manager
+sudo pacman -S sddm          # installs SDDM package
+sudo systemctl enable sddm.service   # enables SDDM service
 ```
 
 ## Stuck on a Black Screen, Cannot return to Desktop again
