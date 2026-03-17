@@ -423,10 +423,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-the-plasma-login-manager-and-how-can-i-install-it" class="md-nav__link">
+  <a href="#what-is-the-sddm-and-how-can-i-install-it" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is the Plasma Login Manager and how can I install it?
+        What is the SDDM and how can I install it?
       
     </span>
   </a>
@@ -641,10 +641,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-the-plasma-login-manager-and-how-can-i-install-it" class="md-nav__link">
+  <a href="#what-is-the-sddm-and-how-can-i-install-it" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is the Plasma Login Manager and how can I install it?
+        What is the SDDM and how can I install it?
       
     </span>
   </a>
@@ -753,7 +753,7 @@
 <ul>
 <li>The Gamescope session may fail to start for some reason.</li>
 <li>Alternatively, there might be an issue with the shortcut used to switch to Game Mode. Try switching manually by running <code>steamos-session-select gamescope</code>  in the terminal.</li>
-<li>Another possibility is that there may be an issue with the Plasma Login Manager configuration file. Try editing the config file, which is usually located at <code>/etc/plasmalogin.conf</code>.</li>
+<li>Another possibility is that there may be an issue with the SDDM configuration file. Try editing the config file, which is usually located at <code>/etc/sddm.conf</code>.</li>
 </ul>
 <h2 id="stuck-on-a-black-screen-cannot-return-to-desktop-again">Stuck on a Black Screen, Cannot return to Desktop again</h2>
 <div class="admonition info">
@@ -764,27 +764,27 @@
 <li>The Gamescope session may fail to start for some reason, and now it shows a black screen.</li>
 <li>Your hardware may not be supported. If you want to remove the script, you can use the <strong>Uninstall</strong> option in GUI Helper.</li>
 </ul>
-<h2 id="what-is-the-plasma-login-manager-and-how-can-i-install-it">What is the Plasma Login Manager and how can I install it?</h2>
+<h2 id="what-is-the-sddm-and-how-can-i-install-it">What is the SDDM and how can I install it?</h2>
 <ul>
-<li><strong>Plasma Login Manager</strong> is a display manager for Linux that handles graphical login, allowing you to choose a user account and start a desktop session.</li>
+<li><strong>SDDM</strong> is a display manager for Linux that handles graphical login, allowing you to choose a user account and start a desktop session.</li>
 <li>Display managers are the login screen that appears when you start your system.</li>
 <li>It is usually included by default on systems with the KDE Plasma desktop.</li>
-<li>The script switches between desktop mode and gaming mode by editing Plasma Login Manager's config file each time.</li>
-<li>If Plasma Login Manager is not available on your system, firstly you need to know and uninstall the display manager you're currently using. <blockquote>
+<li>The script switches between desktop mode and gaming mode by editing SDDM's config file each time.</li>
+<li>If SDDM is not available on your system, firstly you need to know and uninstall the display manager you're currently using. <blockquote>
 <ul>
 <li>You can see the current display manager with the <code>systemctl status display-manager</code> command.</li>
 <li>In the <code>Loaded:</code> section you will see the current display manager <code>(like gdm.service or lightdm.service)</code>
   <img alt="Display Manager Service" src="../images/displaymanager.png" /></li>
 <li>For example, if you have GDM on your system, to disable it: <code>sudo systemctl disable gdm.service</code></li>
-<li>Afterwards, you can install and activate the Plasma Login Manager package with the commands below.</li>
+<li>Afterwards, you can install and enable the SDDM package with the commands below.</li>
 </ul>
 </blockquote>
 </li>
 </ul>
-<p>If Plasma Login Manager is not installed on your system, you can install it with the following command:
+<p>If SDDM is not installed on your system, you can install it with the following command:
 <div class="highlight"><pre><span></span><code><span class="c1"># If you are using another display manager, you must disable it first (explained above).</span>
-sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>plasma-login-manager<span class="w">          </span><span class="c1"># installs Plasma Login Manager package</span>
-sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>plasmalogin<span class="w">   </span><span class="c1"># enables Plasma Login Manager</span>
+sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>sddm<span class="w">          </span><span class="c1"># installs SDDM package</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>sddm.service<span class="w">   </span><span class="c1"># enables SDDM service</span>
 </code></pre></div></p>
 <h2 id="stuck-on-a-black-screen-cannot-return-to-desktop-again_1">Stuck on a Black Screen, Cannot return to Desktop again</h2>
 <div class="admonition info">
