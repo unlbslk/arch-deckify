@@ -7,13 +7,30 @@ fi
 
 echo -e "\n\n\e[1;33mWelcome to Arch Deckify Script\e[0m"
 echo -e "\e[91mWarning: This script mostly does not work on NVIDIA cards.\e[0m"
-echo -e "\e[37mThis script has been made to work only on Plasma Login Manager.\e[0m"
+echo -e "\e[37mThis script has been made to work only on SDDM.\e[0m"
 echo -e "\e[37mYou must make additional changes for other display managers.\n\n\e[0m"
 dm=$(basename "$(readlink /etc/systemd/system/display-manager.service)")
 
-if [[ "$dm" != "plasmalogin.service" ]]; then
-    echo -e "\e[31m[ERROR] \e[0mPlasma Login Manager is not found. (see: https://unlbslk.github.io/arch-deckify/issues/#what-is-the-plasma-login-manager-and-how-can-i-install-it)"
-    exit 1
+if [[ "$dm" != "sddm.service" ]]; then
+    echo -e "\e[31m[ERROR] \e[0mSDDM is not found. (see: https://unlbslk.github.io/arch-deckify/issues/#what-is-the-sddm-and-how-can-i-install-it)\n"
+    read -p "Do you want to install SDDM? (y/n): " sddmread
+
+    if [[ "$sddmread" == "y" || "$sddmread" == "Y" ]]; then
+        if pacman -Qi sddm &> /dev/null; then
+        echo "SDDM is already installed."
+        else
+            sudo pacman -S sddm --noconfirm
+            if ! pacman -Qi sddm &> /dev/null; then
+                echo -e "\e[91mERROR:\e[0m SDDM is not installed"
+                exit 1
+            fi
+            sudo systemctl disable display-manager.service
+            sudo systemctl enable sddm.service
+            echo "SDDM service enabled"
+        fi
+    else
+        exit 1
+    fi
 fi
 
 sudo whoami
@@ -87,14 +104,30 @@ fi
 echo -e "\n\e[36m [5/18]\e[0m Installing gamescope-session-steam-git from AUR...\n"
 yay -S --aur gamescope-session-steam-git --noconfirm --sudoloop || paru -S --aur gamescope-session-steam-git --noconfirm
 
+if ! pacman -Qi gamescope-session-steam-git &> /dev/null; then
+     echo -e "\e[31m[ERROR] \e[0mgamescope-session-steam-git package could not be installed. It may be conflicting with another package on your system."
+    exit 1
+fi
 
-CONFIG_FILE="/etc/plasmalogin.conf"
-echo "[6/18] Configuring auto-login for Plasma Login Manager..."
-sudo tee /etc/plasmalogin.conf > /dev/null <<EOF
+
+CONFIG_FILE="/etc/sddm.conf"
+echo "[6/18] Configuring auto-login for SDDM..."
+sudo tee /etc/sddm.conf > /dev/null <<EOF
 [Autologin]
 Relogin=true
 Session=$selected_de
 User=$(whoami)
+
+[General]
+HaltCommand=/usr/bin/systemctl poweroff
+RebootCommand=/usr/bin/systemctl reboot
+
+[Theme]
+Current=
+
+[Users]
+MaximumUid=60513
+MinimumUid=1000
 EOF
 
 echo "Autologin configured for user: $(whoami)"
@@ -103,7 +136,7 @@ echo -e "\n\e[36m [7/18]\e[0m Creating /usr/bin/steamos-session-select\n"
 
 echo '#!/usr/bin/bash
 
-CONFIG_FILE="/etc/plasmalogin.conf"
+CONFIG_FILE="/etc/sddm.conf"
 
 # If no arguments are provided, list valid arguments
 if [ $# -eq 0 ]; then
@@ -120,7 +153,7 @@ if [ "$1" == "plasma" ] || [ "$1" == "desktop" ]; then
     
     echo "Switching session to Desktop."
     if [ ! -f "$CONFIG_FILE" ]; then
-        echo "Plasma Login Manager config file could not be found at $CONFIG_FILE."
+        echo "SDDM config file could not be found at $CONFIG_FILE."
         exit 1
     fi
     NEW_SESSION='$selected_de' # For other desktops, change here.
@@ -132,7 +165,7 @@ elif [ "$1" == "gamescope" ]; then
     
     echo "Switching session to Gamescope."
     if [ ! -f "$CONFIG_FILE" ]; then
-        echo "Plasma Login Manager config file could not be found at $CONFIG_FILE."
+        echo "SDDM config file could not be found at $CONFIG_FILE."
         exit 1
     fi
     NEW_SESSION="gamescope-session-steam"
@@ -146,7 +179,7 @@ fi' | sudo tee /usr/bin/steamos-session-select > /dev/null
 echo -e "\n\e[36m [8/18]\e[0m Making /usr/bin/steamos-session-select executable...\n"
 sudo chmod +x /usr/bin/steamos-session-select
 
-echo -e "\n\e[36m [9/18]\e[0m Creating Plasma Login Manager sudoers rule...\n"
+echo -e "\n\e[36m [9/18]\e[0m Creating SDDM sudoers rule...\n"
 sudoers_file="/etc/sudoers.d/sddm_config_edit"
 if [ ! -f "$sudoers_file" ]; then
     echo "ALL ALL=(ALL) NOPASSWD: /usr/bin/sed -i s/^Session=*/Session=*/ ${CONFIG_FILE}" | sudo tee "$sudoers_file" > /dev/null
@@ -210,22 +243,22 @@ fi
 # Desktop icon
 if [ ! -e "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop" ]; then
     echo "[Desktop Entry]
-    Name=Gaming Mode
-    Exec=steamos-session-select gamescope
-    Icon=$HOME/arch-deckify/steam-gaming-return.png
-    Terminal=false
-    Type=Application
-    StartupNotify=false" > "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop"
+Name=Gaming Mode
+Exec=steamos-session-select gamescope
+Icon=$HOME/arch-deckify/steam-gaming-return.png
+Terminal=false
+Type=Application
+StartupNotify=false" > "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop"
 fi
 
 if [ ! -e "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop" ]; then
     echo "[Desktop Entry]
-    Name=Deckify Helper
-    Exec=bash -c 'curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash'
-    Icon=$HOME/arch-deckify/helper.png
-    Terminal=true
-    Type=Application
-    StartupNotify=false" > "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop"
+Name=Deckify Helper
+Exec=bash -c 'curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash'
+Icon=$HOME/arch-deckify/helper.png
+Terminal=true
+Type=Application
+StartupNotify=false" > "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop"
 fi
 
 chmod +x "$(xdg-user-dir DESKTOP)/Return_to_Gaming_Mode.desktop"
@@ -234,25 +267,25 @@ chmod +x "$(xdg-user-dir DESKTOP)/Deckify_Tools.desktop"
 # Application
 if [ ! -e "/usr/share/applications/Return_to_Gaming_Mode.desktop" ]; then
     echo "[Desktop Entry]
-    Name=Gaming Mode
-    Exec=steamos-session-select gamescope
-    Icon=$HOME/arch-deckify/steam-gaming-return.png
-    Terminal=false
-    Type=Application
-    StartupNotify=false" > "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
-    chmod +x "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
-    sudo cp "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop" "/usr/share/applications/"
-    rm -rf "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
+Name=Gaming Mode
+Exec=steamos-session-select gamescope
+Icon=$HOME/arch-deckify/steam-gaming-return.png
+Terminal=false
+Type=Application
+StartupNotify=false" > "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
+chmod +x "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
+sudo cp "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop" "/usr/share/applications/"
+rm -rf "$(xdg-user-dir)/Return_to_Gaming_Mode.desktop"
 fi
 
 if [ ! -e "/usr/share/applications/Deckify_Tools.desktop" ]; then
-    echo "[Desktop Entry]
-    Name=Deckify Helper
-    Exec=bash -c 'curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash'
-    Icon=$HOME/arch-deckify/helper.png
-    Terminal=true
-    Type=Application
-    StartupNotify=false" > "$(xdg-user-dir)/Deckify_Tools.desktop"
+echo "[Desktop Entry]
+Name=Deckify Helper
+Exec=bash -c 'curl -sSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/heads/main/gui_helper.sh | bash'
+Icon=$HOME/arch-deckify/helper.png
+Terminal=true
+Type=Application
+StartupNotify=false" > "$(xdg-user-dir)/Deckify_Tools.desktop"
     chmod +x "$(xdg-user-dir)/Deckify_Tools.desktop"
     sudo cp "$(xdg-user-dir)/Deckify_Tools.desktop" "/usr/share/applications/"
     rm -rf "$(xdg-user-dir)/Deckify_Tools.desktop"
