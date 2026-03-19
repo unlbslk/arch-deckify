@@ -6,16 +6,14 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/unlbslk/arch-deckify/refs/
 
 - After you enter your sudo password, the script will ask you which desktop environment you want to use as desktop mode:
 ![Installation](images/installation.png)
-!!! info
-	If the installation fails because SDDM is not found, see [how to install SDDM](issues.md#what-is-the-sddm-and-how-can-i-install-it).
-
+
 **During installation, the following will happen in order:**
 
 - If an AUR helper (yay/paru) is not installed on the system, `yay` will be installed automatically.
 - If Arch Linux's `multilib` repository is not enabled on your system, it will be automatically enabled and the system will be updated (for syncing repos).
 - If Steam is not installed on your system, it will be automatically downloaded from the `multilib` repository.
 !!! warning
-	If you've previously downloaded Steam from Flathub, the script may cause issues. Try downloading from the Multilib repository.
+	If you've previously downloaded Steam from Flathub (or any other sources), the script may cause issues. Try downloading from the Multilib repository.
 - Installs gamescope-session-steam-git from the AUR (includes gamescope and other dependencies).
 - Generates an sddm.conf file in /etc/ to enable autologin and session switching.
 - Adds a sudoers rule to allow session switching without a password.
