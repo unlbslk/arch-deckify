@@ -14,7 +14,7 @@
 !!! info
 	If you get stuck on a black screen, see the [stuck on a black screen](issues.md#stuck-on-a-black-screen-cannot-return-to-desktop-again) section to return to the desktop again.
 
-- Most users report that it does not work with NVIDIA GPUs.
-- It is designed for the Steam Deck, which uses an AMD GPU, and should generally work on most AMD GPUs, though minor tweaks may be needed in some cases.
-- For *multi-display* setups, some additional configuration may be required. Should work good with single display setups.
+- If you are using an NVIDIA GPU, it is recommended that you use the `nvidia-open` driver.
+- It is designed for the Steam Deck, which uses an AMD GPU, and should generally work on most AMD GPUs.
+- For *multi-display* setups, some additional configuration may be required. Should work with single display setups.
 
