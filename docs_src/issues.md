@@ -3,13 +3,20 @@
 ## When I switch to Gaming Mode it takes me back to the desktop
 - The Gamescope session may fail to start for some reason.
 - Alternatively, there might be an issue with the shortcut used to switch to Game Mode. Try switching manually by running `steamos-session-select gamescope`  in the terminal.
-- Another possibility is that there may be an issue with the SDDM configuration file. Try editing the config file, which is usually located at `/etc/sddm.conf`.
+- If you can enter Game Mode by selecting the Steam Big Picture Mode session from the login screen and logging in, the issue may be with the SDDM configuration, which is located at `/etc/sddm.conf`.
 
 ## Stuck on a Black Screen, Cannot return to Desktop again
 !!! info
-	If you stuck on a black screen, try switching to a TTY with key combinations (ex.: `CTRL+ALT+F6`), login with your username and password, run the `steamos-session-select desktop` command, and then return to the first TTY using the `CTRL+ALT+F1` (or `CTRL+ALT+F2`) key combination. You will be back in desktop mode.
+	If you stuck on a black screen, try switching to a TTY with key combinations (ex.: `CTRL+ALT+F4`), login with your username and password, run the `steamos-session-select desktop` command, and then return to the first TTY using the `CTRL+ALT+F1` (or `CTRL+ALT+F2`) key combination. You will be back in desktop mode.
+- Steam may be downloading files in the background during the initial launch; in that case, please wait a few minutes.
 - The Gamescope session may fail to start for some reason, and now it shows a black screen.
 - Your hardware may not be supported. If you want to remove the script, you can use the **Uninstall** option in GUI Helper.
+
+## Steam Unable to download the required update Error
+![Display Manager Service](images/steam-network-issue.png)
+- Return to desktop mode, launch Steam as usual, and sign in to your account. When you switch back to game mode, the error screen will disappear.
+!!! info
+	If the “Return to Desktop” option does not appear and you cannot return to the desktop, try switching to a TTY using a key combination (e.g., `CTRL+ALT+F4`), log in with your username and password, run the `steamos-session-select desktop` command, and then return to the first TTY using the `CTRL+ALT+F1` (or `CTRL+ALT+F2`) key combination. You will be back in desktop mode.
 
 ## What is the SDDM and how can I install it?
 - **SDDM** is a display manager for Linux that handles graphical login, allowing you to choose a user account and start a desktop session.
@@ -32,7 +39,7 @@ sudo systemctl enable sddm.service   # enables SDDM service
 
 ## Stuck on a Black Screen, Cannot return to Desktop again
 !!! info
-	If you stuck on a black screen, try switching to a TTY with key combinations (ex.: `CTRL+ALT+F6`), login with your username and password, run the `steamos-session-select desktop` command, and then return to the first TTY using the `CTRL+ALT+F1` (or `CTRL+ALT+F2`) key combination. You will be back in desktop mode.
+	If you stuck on a black screen, try switching to a TTY with key combinations (ex.: `CTRL+ALT+F4`), login with your username and password, run the `steamos-session-select desktop` command, and then return to the first TTY using the `CTRL+ALT+F1` (or `CTRL+ALT+F2`) key combination. You will be back in desktop mode.
 - The Gamescope session may fail to start for some reason, and now it shows a black screen.
 - Your hardware may not be supported. If you want to remove the script, you can use the **Uninstall** option in GUI Helper.
 
