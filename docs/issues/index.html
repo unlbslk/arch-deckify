@@ -423,6 +423,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#steam-unable-to-download-the-required-update-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steam Unable to download the required update Error
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-is-the-sddm-and-how-can-i-install-it" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -641,6 +652,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#steam-unable-to-download-the-required-update-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steam Unable to download the required update Error
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-is-the-sddm-and-how-can-i-install-it" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -753,17 +775,25 @@
 <ul>
 <li>The Gamescope session may fail to start for some reason.</li>
 <li>Alternatively, there might be an issue with the shortcut used to switch to Game Mode. Try switching manually by running <code>steamos-session-select gamescope</code>  in the terminal.</li>
-<li>Another possibility is that there may be an issue with the SDDM configuration file. Try editing the config file, which is usually located at <code>/etc/sddm.conf</code>.</li>
+<li>If you can enter Game Mode by selecting the Steam Big Picture Mode session from the login screen and logging in, the issue may be with the SDDM configuration, which is located at <code>/etc/sddm.conf</code>.</li>
 </ul>
 <h2 id="stuck-on-a-black-screen-cannot-return-to-desktop-again">Stuck on a Black Screen, Cannot return to Desktop again</h2>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>If you stuck on a black screen, try switching to a TTY with key combinations (ex.: <code>CTRL+ALT+F6</code>), login with your username and password, run the <code>steamos-session-select desktop</code> command, and then return to the first TTY using the <code>CTRL+ALT+F1</code> (or <code>CTRL+ALT+F2</code>) key combination. You will be back in desktop mode.</p>
+<p>If you stuck on a black screen, try switching to a TTY with key combinations (ex.: <code>CTRL+ALT+F4</code>), login with your username and password, run the <code>steamos-session-select desktop</code> command, and then return to the first TTY using the <code>CTRL+ALT+F1</code> (or <code>CTRL+ALT+F2</code>) key combination. You will be back in desktop mode.</p>
 </div>
 <ul>
+<li>Steam may be downloading files in the background during the initial launch; in that case, please wait a few minutes.</li>
 <li>The Gamescope session may fail to start for some reason, and now it shows a black screen.</li>
 <li>Your hardware may not be supported. If you want to remove the script, you can use the <strong>Uninstall</strong> option in GUI Helper.</li>
 </ul>
+<h2 id="steam-unable-to-download-the-required-update-error">Steam Unable to download the required update Error</h2>
+<p><img alt="Display Manager Service" src="../images/steam-network-issue.png" />
+- Return to desktop mode, launch Steam as usual, and sign in to your account. When you switch back to game mode, the error screen will disappear.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If the “Return to Desktop” option does not appear and you cannot return to the desktop, try switching to a TTY using a key combination (e.g., <code>CTRL+ALT+F4</code>), log in with your username and password, run the <code>steamos-session-select desktop</code> command, and then return to the first TTY using the <code>CTRL+ALT+F1</code> (or <code>CTRL+ALT+F2</code>) key combination. You will be back in desktop mode.</p>
+</div>
 <h2 id="what-is-the-sddm-and-how-can-i-install-it">What is the SDDM and how can I install it?</h2>
 <ul>
 <li><strong>SDDM</strong> is a display manager for Linux that handles graphical login, allowing you to choose a user account and start a desktop session.</li>
@@ -789,7 +819,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">en
 <h2 id="stuck-on-a-black-screen-cannot-return-to-desktop-again_1">Stuck on a Black Screen, Cannot return to Desktop again</h2>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>If you stuck on a black screen, try switching to a TTY with key combinations (ex.: <code>CTRL+ALT+F6</code>), login with your username and password, run the <code>steamos-session-select desktop</code> command, and then return to the first TTY using the <code>CTRL+ALT+F1</code> (or <code>CTRL+ALT+F2</code>) key combination. You will be back in desktop mode.</p>
+<p>If you stuck on a black screen, try switching to a TTY with key combinations (ex.: <code>CTRL+ALT+F4</code>), login with your username and password, run the <code>steamos-session-select desktop</code> command, and then return to the first TTY using the <code>CTRL+ALT+F1</code> (or <code>CTRL+ALT+F2</code>) key combination. You will be back in desktop mode.</p>
 </div>
 <ul>
 <li>The Gamescope session may fail to start for some reason, and now it shows a black screen.</li>
