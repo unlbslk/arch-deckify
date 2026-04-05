@@ -6,9 +6,6 @@ if [ "$EUID" -eq 0 ]; then
 fi
 
 echo -e "\n\n\e[1;33mWelcome to Arch Deckify Script\e[0m"
-echo -e "\e[91mWarning: This script mostly does not work on NVIDIA cards.\e[0m"
-echo -e "\e[37mThis script has been made to work only on SDDM.\e[0m"
-echo -e "\e[37mYou must make additional changes for other display managers.\n\n\e[0m"
 dm=$(basename "$(readlink /etc/systemd/system/display-manager.service)")
 
 if [[ "$dm" != "sddm.service" ]]; then
@@ -170,7 +167,7 @@ elif [ "$1" == "gamescope" ]; then
     fi
     NEW_SESSION="gamescope-session-steam"
     sudo sed -i "s/^Session=.*/Session=${NEW_SESSION}/" "$CONFIG_FILE"
-    dbus-send --session --type=method_call --print-reply --dest=org.kde.Shutdown /Shutdown org.kde.Shutdown.logout || gnome-session-quit --logout --no-prompt || cinnamon-session-quit --logout --no-prompt || loginctl terminate-session $XDG_SESSION_ID
+    niri msg action quit -s || dbus-send --session --type=method_call --print-reply --dest=org.kde.Shutdown /Shutdown org.kde.Shutdown.logout || gnome-session-quit --logout --no-prompt || cinnamon-session-quit --logout --no-prompt || loginctl terminate-session $XDG_SESSION_ID
 else
     echo "Valid arguments are: plasma, gamescope."
     exit 1
@@ -306,6 +303,7 @@ AUR_HELPER=""; UPDATE_CMD=""; command -v yay &>/dev/null && AUR_HELPER="yay" && 
 EOL
 chmod +x "$update_script_path"
 echo -e "\n\e[36m [18/18]\e[0m 'system_update.sh' has been added to $update_script_path\n"
-echo -e "\n\n\e[1;33mInstallation is complete. We recommend you to reboot your system.\e[0m"
-echo -e "\n\e[1;30mIf you encounter an issue (such as being stuck on a black screen), check here:\e[0m https://unlbslk.github.io/arch-deckify/issues/"
-echo -e "\n\e[37mYou can update the system in Steam by adding the ~/arch-deckify/system_update.sh file to Steam as a non-Steam game while in desktop mode.\nUnfortunately, system updates are not possible through Steam settings.\e[0m\n\n"
+echo -e "\n\n\e[1;33mInstallation is complete.\e[0m"
+echo -e "\n\e[1;30mIf you encounter an issue, check here:\e[0m https://unlbslk.github.io/arch-deckify/issues/"
+echo -e "\n\e[37mYou can update the system in Steam by adding the\e[0m ~/arch-deckify/system_update.sh \e[37mfile to Steam as a non-Steam game while in desktop mode.\nUnfortunately, system updates are not possible through Steam settings.\e[0m\n"
+echo -e "\e[1;37m- We strongly recommend that you restart your system first (it will boot into desktop mode)\n- If you get stuck on a black screen when switching to game mode, please wait. Steam may be downloading files during the initial startup\n- If you get stuck in game mode, check the issues page\n- You may get stuck in game mode; in that case, check the issues page above\n- To remove the script from your system, click the Deckify Helper shortcut and select the Uninstall option\e[0m\n"
