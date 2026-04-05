@@ -33,6 +33,7 @@ fi
 
 while true; do
     allTools=(
+        "Run Gamescope Session" "Start Gamescope session in a window"
         "Update System" "Updates all system packages"
         "Change Default Desktop" "Set your preferred desktop session"
     )
@@ -67,6 +68,10 @@ while true; do
     fi
 
     case "$SELECTION" in
+        "Run Gamescope Session")
+            echo "Starting session..."
+            gamescope-session-plus steam
+            ;;
         "Update System")
             ask_sudo
             (
