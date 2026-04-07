@@ -98,17 +98,35 @@ else
     echo "Steam is already installed. (SKIPPED)"
 fi
 
+if pacman -Qq | grep -x "gamescope-session-cachyos" &> /dev/null; then
+    echo -e "\n\e[31m[WARNING] \e[1;93mThe gamescope-session-cachyos package is installed on your system. This package conflicts with the gamescope-session-steam-git package you are about to install.\n\n\e[1;30m- If you decide to uninstall the Arch-Deckify script in the future, the gamescope-session-cachyos package will NOT be reinstalled. In that case, you can reinstall it using the command: sudo pacman -S gamescope-session-cachyos\e[0m\n"
+    read -p "To continue the installation, the package must be uninstalled. Do you want to uninstall it (y/n): " answ
+
+    if [[ "$answ" == "y" || "$answ" == "Y" ]]; then
+        echo "Removing conflicting gamescope session packages..."
+        pacman -Qq | grep gamescope-session | xargs -r sudo pacman -R --noconfirm
+        echo "Deleting conflicting SteamOS-related scripts..."
+        sudo rm /usr/bin/jupiter-biosupdate /usr/bin/steamos-session-select /usr/bin/steamos-polkit-helpers/jupiter-biosupdate /usr/bin/steamos-polkit-helpers/steamos-select-branch /usr/bin/steamos-polkit-helpers/steamos-update /usr/share/wayland-sessions/gamescope-session.desktop
+        echo "Removing SteamOS SDDM autologin config..."
+        sudo rm /etc/sddm.conf.d/zz-steamos-autologin.conf
+    else
+        echo "The installation was canceled. No changes were made."
+        exit 1
+    fi
+
+fi
+
 echo -e "\n\e[36m [5/18]\e[0m Installing gamescope-session-steam-git from AUR...\n"
 yay -S --aur gamescope-session-steam-git --noconfirm --sudoloop || paru -S --aur gamescope-session-steam-git --noconfirm
 
-if ! pacman -Qi gamescope-session-steam-git &> /dev/null; then
-     echo -e "\e[31m[ERROR] \e[0mgamescope-session-steam-git package could not be installed. It may be conflicting with another package on your system."
+if ! pacman -Qq | grep -x "gamescope-session-steam-git" &> /dev/null; then
+     echo -e "\e[31m[ERROR] \e[1;93mgamescope-session-steam-git package could not be installed. It may be conflicting with another package on your system. Please try running the script again.\e[0m"
     exit 1
 fi
 
 
 CONFIG_FILE="/etc/sddm.conf"
-echo "[6/18] Configuring auto-login for SDDM..."
+echo  -e "\n\e[36m [6/18]\e[0m Configuring auto-login for SDDM...\n"
 sudo tee /etc/sddm.conf > /dev/null <<EOF
 [Autologin]
 Relogin=true
